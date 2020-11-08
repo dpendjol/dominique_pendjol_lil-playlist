@@ -1,9 +1,28 @@
 import React from 'react'
 import './SongItem.css'
 
+function SongHeader () {
+    return (
+        <li className="SongItem SongItem__title">
+            <span>
+                Titel
+            </span>
+            <span>
+                Artiest
+            </span>
+            <span>
+                Genre
+            </span>
+            <span>
+                Rating
+            </span>
+        </li>
+    );
+}
+
 function SongItem ({song}) {
     return (
-        <div className='SongItem'>
+        <li className='SongItem'>
             <span>
                 {song.title}
             </span>
@@ -16,8 +35,8 @@ function SongItem ({song}) {
             <span>
                 {song.rating}
             </span>
-        </div>
+        </li>
     )
 }
 
-export default SongItem
+export { SongItem, SongHeader }

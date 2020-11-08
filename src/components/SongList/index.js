@@ -1,6 +1,6 @@
 import React from 'react';
-import SongHeader from '../SongHeader'
-import SongItem from '../SongItem'
+import {SongItem, SongHeader} from '../SongItem'
+import './SongList.css'
 
 const SongList = ({ songList }) => {
     console.log(songList)
@@ -11,10 +11,10 @@ const SongList = ({ songList }) => {
     })
 
     return (
-        <div>
+        <ul className='SongList'>
             <SongHeader></SongHeader>
             {allSongItems}
-        </div>
+        </ul>
     )
 }
 

@@ -1,8 +1,6 @@
 .Container {
+    width: 90%;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-around;
-  }
-
-  .Container > div {
-    width: 40vw;
   }

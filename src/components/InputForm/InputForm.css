@@ -1,0 +1,16 @@
+.InputForm {
+    width: 250px;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-between;
+
+    border: 1px solid black;
+    padding: 10px;
+}
+
+.InputForm > label {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+

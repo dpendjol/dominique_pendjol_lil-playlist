@@ -70,28 +70,28 @@ class InputForm extends Component {
         return (
             <form className='InputForm' onSubmit={this.handleClick}>
                 <label>
-                    Titel
+                    <span>Titel</span>
                     <input type='text' name='title' value={this.state.title} onChange={this.handleChange} />
                 </label>
 
                 <br />
 
                 <label>
-                    Artiest
+                    <span>Artiest</span>
                     <input type='text' name='artist' value={this.state.artist} onChange={this.handleChange} />
                 </label>
                 
                 <br />
 
                 <label>
-                    Genre
+                    <span>Genre</span>
                     <input type='text' name='genre' value={this.state.genre} onChange={this.handleChange} />
                 </label>
                 
                 <br />
 
                 <label>
-                    Rating
+                    <span>Rating</span>
                     <label>
                         <input type='radio' name='rating' value={1} onChange={this.handleChange} />
                         1
