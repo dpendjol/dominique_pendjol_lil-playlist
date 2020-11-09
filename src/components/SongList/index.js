@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import './SongList.css'
 
-const SongList = ({ songList, options}) => {
+const SongList = ({ songList, options, genre}) => {
     const [sortBy, setSortBy] = useState(null)
     const [sortOrder, setSortOrder] = useState(true)
     
@@ -63,7 +63,7 @@ const SongList = ({ songList, options}) => {
 
     return (
         <table className='SongList'>
-            <caption>Alle liedjes</caption>
+            <caption>{genre ? 'Alle liedjes in ' + genre : 'Alle liedjes'}</caption>
             <thead>
                 <tr>
                     <th onClick={() => sorting('title')} className={getClass('title')}>Titel</th>

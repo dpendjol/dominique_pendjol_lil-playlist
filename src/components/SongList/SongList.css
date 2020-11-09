@@ -2,7 +2,7 @@
     list-style: none;
     margin: 0;
     padding: 0;
-    width: 70%;
+    width: 100%;
 }
 
 .ascending::after {
@@ -15,4 +15,15 @@
     /* background-color: red; */
     font-family: "Font Awesome 5 Free";
     content: "  \f0de";
+}
+
+.SongList > caption {
+    margin-top: 20px;
+    font-size: 1.2rem;
+    font-style: italic;
+    text-decoration: underline;
+}
+
+.SongList:first-child > caption {
+    margin-top: 0px;
 }
