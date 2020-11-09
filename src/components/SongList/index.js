@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import './SongList.css'
 
-const SongList = ({ songList}) => {
+const SongList = ({ songList, options}) => {
     const [sortBy, setSortBy] = useState(null)
     const [sortOrder, setSortOrder] = useState(true)
     
@@ -16,6 +16,14 @@ const SongList = ({ songList}) => {
         }
     }
 
+    const handleClickDelete = (event) => {
+        options.delete(event.target.value)
+    }
+
+    const handleClickEdit = () => {
+
+    }
+
     const getClass = (column) => {
         if (sortBy === null) {
             return
@@ -24,8 +32,6 @@ const SongList = ({ songList}) => {
         if (sortBy === column) {
             return sortOrder ? 'ascending' : 'descending'
         }
-
-        
     }
 
     if (sortBy !== null) {
@@ -43,6 +49,14 @@ const SongList = ({ songList}) => {
                 <td>{song.artist}</td>
                 <td>{song.genre}</td>
                 <td>{song.rating}</td>
+                {options ? 
+                        <td> 
+                        <button value={song.id} onClick={handleClickDelete}>delete</button>
+                        {/* <button onClick={handleClickEdit}>edit</button>  */}
+                        </td> 
+                    : 
+                        null
+                    }
             </tr>
         )
     })
@@ -56,6 +70,7 @@ const SongList = ({ songList}) => {
                     <th onClick={() => sorting('artist')} className={getClass('artist')}>Artiest</th>
                     <th onClick={() => sorting('genre')} className={getClass('genre')}>Genre</th>
                     <th onClick={() => sorting('rating')} className={getClass('rating')}>Rating</th>
+                    {options ? <th> Options </th> : null}
                 </tr>
             </thead>
             <tbody>

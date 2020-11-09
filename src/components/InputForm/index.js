@@ -62,7 +62,6 @@ class InputForm extends Component {
             default:
                 return;
         }
-        console.log(returnObject)
         this.setState(returnObject)
     }
 
