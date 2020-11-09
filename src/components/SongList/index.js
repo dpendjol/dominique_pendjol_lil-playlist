@@ -1,20 +1,56 @@
-import React from 'react';
-import {SongItem, SongHeader} from '../SongItem'
+import React, {useState} from 'react';
 import './SongList.css'
 
-const SongList = ({ songList }) => {
-    console.log(songList)
-    const allSongItems = songList.map(song => {
+const SongList = ({ songList}) => {
+    const [sortBy, setSortBy] = useState(null)
+    const [sortOrder, setSortOrder] = useState(true)
+    
+    const sortedSongList = [...songList]
+    
+    const sorting = (key) => {
+        if (sortBy === key) {
+            setSortOrder(!sortOrder)
+        } else {
+            setSortBy(true)
+            setSortBy(key)
+        }
+    }
+
+    if (sortBy !== null) {
+        sortedSongList.sort((a,b) => {
+            if (a[sortBy] < b[sortBy]) return sortOrder ? -1 : 1
+            if (a[sortBy] > b[sortBy]) return sortOrder ? 1 : -1
+            return 0
+        })
+    }
+    
+    const allSongItems = sortedSongList.map(song => {
         return (
-            <SongItem key={song.id} song={song}></SongItem>
+            <tr key={song.id}>
+                <td>{song.title}</td>
+                <td>{song.artist}</td>
+                <td>{song.genre}</td>
+                <td>{song.rating}</td>
+            </tr>
         )
     })
 
     return (
-        <ul className='SongList'>
-            <SongHeader></SongHeader>
+        <table className='SongList'>
+            <caption>Alle liedjes</caption>
+            <thead>
+                <tr>
+                    <th onClick={() => sorting('title')}>Titel</th>
+                    <th onClick={() => sorting('artist')}>Artiest</th>
+                    <th onClick={() => sorting('genre')}>Genre</th>
+                    <th onClick={() => sorting('rating')}>Rating</th>
+                </tr>
+            </thead>
+            <tbody>
             {allSongItems}
-        </ul>
+            </tbody>
+            
+        </table>
     )
 }
 

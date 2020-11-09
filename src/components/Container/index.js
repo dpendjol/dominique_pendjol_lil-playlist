@@ -36,12 +36,16 @@ const initialSongList = [
 ]
 
 const Container = () => {
-    const [songList, setSongList] = useState([])
+    const [songList, setSongList] = useState(initialSongList)
     
     const addSong = (newSong) => {
         const newSongList = songList
         setSongList([...newSongList, newSong])
     }
+    
+    // const deleteSong = oldSong => {
+    //     const newSongList = songList
+    // }
 
     return (
         <div className="Container">
