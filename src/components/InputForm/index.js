@@ -24,7 +24,7 @@ class InputForm extends Component {
                 id: uuid(),
                 title: this.state.title,
                 artist: this.state.artist,
-                genre: this.state.genre,
+                genre: this.state.genre.toLocaleLowerCase(),
                 rating: this.state.rating
             }
         )

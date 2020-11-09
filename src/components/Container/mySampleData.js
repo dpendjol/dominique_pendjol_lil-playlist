@@ -61,7 +61,7 @@ const initialSongList = [
         id: uuid(),
         title: 'Livin\' la Vida Loca',
         artist: 'Ricky Martin',
-        genre: 'Latin',
+        genre: 'latin',
         rating: 3
     },
     { 
@@ -75,7 +75,7 @@ const initialSongList = [
         id: uuid(),
         title: 'God is a DJ',
         artist: 'Faithless',
-        genre: 'Dance',
+        genre: 'dance',
         rating: 2
     },
 ]
