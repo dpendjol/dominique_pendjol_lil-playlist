@@ -11,9 +11,21 @@ const SongList = ({ songList}) => {
         if (sortBy === key) {
             setSortOrder(!sortOrder)
         } else {
-            setSortBy(true)
+            setSortOrder(true)
             setSortBy(key)
         }
+    }
+
+    const getClass = (column) => {
+        if (sortBy === null) {
+            return
+        }
+
+        if (sortBy === column) {
+            return sortOrder ? 'ascending' : 'descending'
+        }
+
+        
     }
 
     if (sortBy !== null) {
@@ -40,10 +52,10 @@ const SongList = ({ songList}) => {
             <caption>Alle liedjes</caption>
             <thead>
                 <tr>
-                    <th onClick={() => sorting('title')}>Titel</th>
-                    <th onClick={() => sorting('artist')}>Artiest</th>
-                    <th onClick={() => sorting('genre')}>Genre</th>
-                    <th onClick={() => sorting('rating')}>Rating</th>
+                    <th onClick={() => sorting('title')} className={getClass('title')}>Titel</th>
+                    <th onClick={() => sorting('artist')} className={getClass('artist')}>Artiest</th>
+                    <th onClick={() => sorting('genre')} className={getClass('genre')}>Genre</th>
+                    <th onClick={() => sorting('rating')} className={getClass('rating')}>Rating</th>
                 </tr>
             </thead>
             <tbody>
