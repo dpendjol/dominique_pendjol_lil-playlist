@@ -8,7 +8,7 @@ import mySampleData from './mySampleData'
 
 const Container = () => {
     const [songList, setSongList] = useState(mySampleData)
-    const [byGenre, setByGenre] = useState(true)
+    const [byGenre, setByGenre] = useState(false)
     
     const addSong = (newSong) => {
         setSongList([...songList, newSong])
@@ -66,7 +66,9 @@ const Container = () => {
 
     return (
         <div className="Container">
-            <InputForm addSong={addSong}></InputForm>
+            <div className='FormContainer'>
+                <InputForm addSong={addSong}></InputForm>
+            </div>
             {toReturn}
         </div>
     )

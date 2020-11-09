@@ -1,10 +1,24 @@
 .Container {
-    width: 90%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+    margin: 0 auto;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 3fr 7fr;
+    grid-template-rows: auto;
+    justify-items: stretch;
   }
 
-  .SongListContainer {
-    width: 70%;
+  .FormContainer {
+    grid-column-start: 1;
   }
+  
+  .SongListContainer {
+    grid-column-start: 2;
+  }
+
+  
+
+  
+
+  /* .SongListContainer {
+    width: 100%;
+  } */
