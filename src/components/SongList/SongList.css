@@ -7,10 +7,12 @@
 
 .ascending::after {
     /* background-color: green; */
-    content: "  \\\/";
+    font-family: "Font Awesome 5 Free";
+    content: "  \f0dd";
 }
 
 .descending::after {
     /* background-color: red; */
-    content: "  \/\\";
+    font-family: "Font Awesome 5 Free";
+    content: "  \f0de";
 }
