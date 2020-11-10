@@ -125,7 +125,6 @@ const Container = () => {
 
             return genre
         })
-        console.log('genresTrue', number)
         setGenresTrue(number)
         setAllGenres(alterdGenres)
     }
