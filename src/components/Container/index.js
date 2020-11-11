@@ -20,7 +20,7 @@ const Container = () => {
     useEffect(() => {
         const uniqueGenres = getUniqueGenres(songList)
         const arrObjGenres = []
-        uniqueGenres.forEach(genre => {
+        uniqueGenres. forEach(genre => {
             arrObjGenres.push({id: uuid(), genre_name: [genre], value: false})
         })
 
@@ -65,19 +65,21 @@ const Container = () => {
     }
 
     const arraySongList = () => {
-        console.log('arraySongList')
-        console.log('genresTrue: ', genresTrue)
-        console.log('filterRating', filterRating)
+ 
+        let displaySongs = [...songList]
+       
         if (byGenre) {
             const songsByGenre = getSongsByGenre(getUniqueGenres(songList), songList)
-            return (<div className='SongListContainer'>
-                {songsByGenre.map(genre => {
-                    return <SongList genre={genre.genre_name} songList={genre.song} options={{delete: deleteSong}}></SongList>
-                })}
+            return (
+                <div className='SongListContainer'>
+                    {songsByGenre.map(genre => {
+                        return <SongList genre={genre.genre_name} songList={genre.song} options={{delete: deleteSong}}></SongList>
+                    })}
                 </div>
             )
-        } else if (genresTrue > 0) { 
-            // get a list of all genres that need to be displayed
+        } else if (genresTrue > 0 || filterRating > 0) { 
+            
+            if (genresTrue > 0) {
             
             const compGenre = allGenres.reduce((trueValues, genre) => {
                 if (genre.value === true) {
@@ -93,29 +95,36 @@ const Container = () => {
                 }
                 return list
             },[])
-            return (
-                <div className='SongListContainer'>
-                    <SongList songList={listToBeDisplayed} options={{delete: deleteSong}}></SongList>
-                </div>
-            )
-        } else if (filterRating > 0) {
-            console.log('Zit in filterRating if statement')
-            const listToBeDisplayed = songList.reduce((list, song) => {
+            
+            displaySongs = listToBeDisplayed
+            }
+            
+            
+            if (filterRating > 0) {
+
+            
+            const listToBeDisplayed = displaySongs.reduce((list, song) => {
                 if (filterRating == song.rating) {
                     list.push(song)
                 }
                 return list
             },[])
-            
-            return (
-                <div className='SongListContainer'>
-                    <SongList songList={listToBeDisplayed} options={{delete: deleteSong}}></SongList>
-                </div>
-            )
+         
+            displaySongs = listToBeDisplayed
+            }
+
         } else {
             return (
                 <div className='SongListContainer'>
                     <SongList songList={songList} options={{delete: deleteSong}}></SongList>
+                </div>
+            )
+        }
+
+        if (filterRating > 0 || genresTrue > 0) {
+            return (
+                <div className='SongListContainer'>
+                    <SongList songList={displaySongs} options={{delete: deleteSong}}></SongList>
                 </div>
             )
         }
@@ -130,7 +139,7 @@ const Container = () => {
         } else {
             number = genresTrue - 1
         }
-        
+
         const alterdGenres = allGenres.map(genre => {
             if (genre.id === id) {
                 genre.value = checked
