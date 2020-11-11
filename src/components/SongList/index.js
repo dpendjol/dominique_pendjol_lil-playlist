@@ -51,7 +51,12 @@ const SongList = ({ songList, options, genre}) => {
                 <td>{song.rating}</td>
                 {options ? 
                         <td> 
-                        <button value={song.id} onClick={handleClickDelete}>delete</button>
+                        <button 
+                            value={song.id} 
+                            onClick={handleClickDelete}
+                            >
+                                delete
+                        </button>
                         {/* <button onClick={handleClickEdit}>edit</button>  */}
                         </td> 
                     : 
@@ -66,7 +71,8 @@ const SongList = ({ songList, options, genre}) => {
             <caption>{genre ? 'Alle liedjes in ' + genre : 'Alle liedjes'}</caption>
             <thead>
                 <tr>
-                    <th onClick={() => sorting('title')} className={getClass('title')}>Titel</th>
+                    <th 
+                        onClick={() => sorting('title')} className={getClass('title')}>Titel</th>
                     <th onClick={() => sorting('artist')} className={getClass('artist')}>Artiest</th>
                     <th onClick={() => sorting('genre')} className={getClass('genre')}>Genre</th>
                     <th onClick={() => sorting('rating')} className={getClass('rating')}>Rating</th>

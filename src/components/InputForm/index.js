@@ -67,24 +67,42 @@ class InputForm extends Component {
 
     render() {
         return (
-            <form className='InputForm' onSubmit={this.handleClick}>
+            <form 
+                className='InputForm' 
+                onSubmit={this.handleClick
+                }>
                 <label>
                     <span>Titel</span>
-                    <input type='text' name='title' value={this.state.title} onChange={this.handleChange} />
+                    <input 
+                        type='text' 
+                        name='title' 
+                        value={this.state.title} 
+                        onChange={this.handleChange} 
+                        />
                 </label>
 
                 <br />
 
                 <label>
                     <span>Artiest</span>
-                    <input type='text' name='artist' value={this.state.artist} onChange={this.handleChange} />
+                    <input 
+                        type='text' 
+                        name='artist' 
+                        value={this.state.artist} 
+                        onChange={this.handleChange} 
+                        />
                 </label>
                 
                 <br />
 
                 <label>
                     <span>Genre</span>
-                    <input type='text' name='genre' value={this.state.genre} onChange={this.handleChange} />
+                    <input 
+                        type='text' 
+                        name='genre' 
+                        value={this.state.genre} 
+                        onChange={this.handleChange} 
+                        />
                 </label>
                 
                 <br />
@@ -92,23 +110,48 @@ class InputForm extends Component {
                 <label>
                     <span>Rating</span>
                     <label>
-                        <input type='radio' name='rating' value={1} onChange={this.handleChange} />
+                        <input 
+                            type='radio' 
+                            name='rating' 
+                            value={1} 
+                            onChange={this.handleChange} 
+                            />
                         1
                     </label>
                     <label>
-                        <input type='radio' name='rating' value={2} onChange={this.handleChange} />
+                        <input 
+                            type='radio' 
+                            name='rating' 
+                            value={2} 
+                            onChange={this.handleChange} 
+                            />
                         2
                     </label>
                     <label>
-                        <input type='radio' name='rating' value={3} onChange={this.handleChange} />
+                        <input 
+                            type='radio' 
+                            name='rating' 
+                            value={3} 
+                            onChange={this.handleChange} 
+                            />
                         3
                     </label>
                     <label>
-                        <input type='radio' name='rating' value={4} onChange={this.handleChange} />
+                        <input 
+                            type='radio' 
+                            name='rating' 
+                            value={4} 
+                            onChange={this.handleChange} 
+                            />
                         4
                     </label>
                     <label>
-                        <input type='radio' name='rating' value={5} onChange={this.handleChange} />
+                        <input 
+                            type='radio' 
+                            name='rating' 
+                            value={5} 
+                            onChange={this.handleChange} 
+                            />
                         5
                     </label>
                 </label>

@@ -1,12 +1,12 @@
 import React from 'react'
 import {useState, useEffect} from 'react'
-import InputForm from '../InputForm'
-import SongList from '../SongList'
 import {v4 as uuid} from 'uuid'
+
 import './container.css'
 
+import SongList from '../SongList'
+import InputForm from '../InputForm'
 import FilterForm from '../FilterForm'
-
 import mySampleData from './mySampleData'
 
 const Container = () => {
@@ -20,42 +20,44 @@ const Container = () => {
     useEffect(() => {
         const uniqueGenres = getUniqueGenres(songList)
         const arrObjGenres = []
-        uniqueGenres. forEach(genre => {
+        uniqueGenres.forEach(genre => {
             arrObjGenres.push({id: uuid(), genre_name: [genre], value: false})
         })
-
         setAllGenres(arrObjGenres)
-    },[songList])
-    
+    },[songList])    
     //filter assignment
 
     // start add song assignment
-    const addSong = (newSong) => {
-        setSongList([...songList, newSong])
-    }
+    const addSong = newSong => setSongList([...songList, newSong])
     // stop add song assignment
 
     // start delete song assignment
     const deleteSong = (delSong) => {
-        const newSongList = songList.filter(song => {
-            if (song.id !== delSong) {
-                return true
-            }
-            return false
-        })
-        setSongList(newSongList)
+        const alteredSongList = songList.filter(song => song.id !== delSong)
+        setSongList(alteredSongList)
     }
     // stop delete song assignment
 
     // CATEGORISEREN
+    /**
+     * Get a list of all genres, one entry per genre
+     * @param {Array} listOfSongs 
+     */
     const getUniqueGenres = (listOfSongs) => {
-        const allGenres = listOfSongs.map(song => song.genre)
+        const uniqueGenres = listOfSongs
+            .map(song => song.genre)
             .reduce((genres, currentValue) => {
-            return genres.includes(currentValue) ? genres : [...genres, currentValue]
+                return genres.includes(currentValue) ? genres : [...genres, currentValue]
         }, [])
-        return allGenres
+
+        return uniqueGenres
     }
 
+    /**
+     * Group the song object by genre. Return them in an array.
+     * @param {Array} uniqueGenres list of all genres, one entry per genre
+     * @param {Array} songList list of all songs consists of objects
+     */
     const getSongsByGenre = (uniqueGenres, songList) => {
         let array = [];
         uniqueGenres.forEach(genre => {
@@ -64,6 +66,9 @@ const Container = () => {
         return array
     }
 
+    /**
+     * Revisit for refactoring
+     */
     const arraySongList = () => {
  
         let displaySongs = [...songList]
@@ -132,13 +137,15 @@ const Container = () => {
     //  CATEGORISEREN
 
     // filter assignment
+    /**
+     * Sets a array in the state for the genres that need to be displayed
+     * Also sets the number of genres that needs to be displayed
+     * @param {String} id uuidV4 string
+     * @param {Boolean} checked value of checkbox
+     */
     const changeGenreFilter = (id, checked) => {
-        let number = 0
-        if (checked == true) {
-            number = genresTrue + 1
-        } else {
-            number = genresTrue - 1
-        }
+        
+        let number = checked === true ? genresTrue + 1 : genresTrue - 1
 
         const alterdGenres = allGenres.map(genre => {
             if (genre.id === id) {
@@ -146,15 +153,16 @@ const Container = () => {
             } 
             return genre
         })
+
         setGenresTrue(number)
         setAllGenres(alterdGenres)
     }
 
-
-    const changeRatingFilter = (value) => {
-        console.log('Setting filter rating to: ', value)
-        setFilterRating(value)
-    }
+    /**
+     * Sets the state of filterRating
+     * @param {Number} value the rating selected by the user
+     */
+    const changeRatingFilter = value => setFilterRating(value)
     //filter assignment
 
 
@@ -163,8 +171,15 @@ const Container = () => {
     return (
         <div className="Container">
             <div className='FormContainer'>
-                <InputForm addSong={addSong}></InputForm>
-                <FilterForm genres={allGenres} changeGenreFilter={changeGenreFilter} rating={filterRating} changeRatingFilter={changeRatingFilter} />
+                <InputForm 
+                    addSong={addSong} 
+                    />
+                <FilterForm 
+                    genres={allGenres} 
+                    changeGenreFilter={changeGenreFilter} 
+                    rating={filterRating} 
+                    changeRatingFilter={changeRatingFilter} 
+                    />
             </div>
             {toReturn}
         </div>
