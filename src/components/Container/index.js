@@ -14,8 +14,9 @@ const Container = () => {
     const [byGenre, setByGenre] = useState(false)
     const [allGenres, setAllGenres] = useState([])
     const [genresTrue, setGenresTrue] = useState(0)
+    const [filterRating, setFilterRating] = useState(0)
     
-    // Execute once on load of component filter assignment
+    // Execute load of component filter assignment if a song is added
     useEffect(() => {
         const uniqueGenres = getUniqueGenres(songList)
         const arrObjGenres = []
@@ -28,10 +29,13 @@ const Container = () => {
     
     //filter assignment
 
+    // start add song assignment
     const addSong = (newSong) => {
         setSongList([...songList, newSong])
     }
+    // stop add song assignment
 
+    // start delete song assignment
     const deleteSong = (delSong) => {
         const newSongList = songList.filter(song => {
             if (song.id !== delSong) {
@@ -41,6 +45,7 @@ const Container = () => {
         })
         setSongList(newSongList)
     }
+    // stop delete song assignment
 
     // CATEGORISEREN
     const getUniqueGenres = (listOfSongs) => {
@@ -59,8 +64,10 @@ const Container = () => {
         return array
     }
 
-    
     const arraySongList = () => {
+        console.log('arraySongList')
+        console.log('genresTrue: ', genresTrue)
+        console.log('filterRating', filterRating)
         if (byGenre) {
             const songsByGenre = getSongsByGenre(getUniqueGenres(songList), songList)
             return (<div className='SongListContainer'>
@@ -91,21 +98,29 @@ const Container = () => {
                     <SongList songList={listToBeDisplayed} options={{delete: deleteSong}}></SongList>
                 </div>
             )
-        
+        } else if (filterRating > 0) {
+            console.log('Zit in filterRating if statement')
+            const listToBeDisplayed = songList.reduce((list, song) => {
+                if (filterRating == song.rating) {
+                    list.push(song)
+                }
+                return list
+            },[])
+            
+            return (
+                <div className='SongListContainer'>
+                    <SongList songList={listToBeDisplayed} options={{delete: deleteSong}}></SongList>
+                </div>
+            )
         } else {
             return (
                 <div className='SongListContainer'>
-                <SongList songList={songList} options={{delete: deleteSong}}></SongList>
+                    <SongList songList={songList} options={{delete: deleteSong}}></SongList>
                 </div>
             )
         }
     }
     //  CATEGORISEREN
-    
-    
-    const uniqueGenres = getUniqueGenres(songList)
-    const toReturn = arraySongList();
-
 
     // filter assignment
     const changeGenreFilter = (id, checked) => {
@@ -120,22 +135,27 @@ const Container = () => {
             if (genre.id === id) {
                 genre.value = checked
             } 
-
-
-
             return genre
         })
         setGenresTrue(number)
         setAllGenres(alterdGenres)
     }
 
+
+    const changeRatingFilter = (value) => {
+        console.log('Setting filter rating to: ', value)
+        setFilterRating(value)
+    }
     //filter assignment
+
+
+    const toReturn = arraySongList();
 
     return (
         <div className="Container">
             <div className='FormContainer'>
                 <InputForm addSong={addSong}></InputForm>
-                <FilterForm genres={allGenres} changeGenreFilter={changeGenreFilter} />
+                <FilterForm genres={allGenres} changeGenreFilter={changeGenreFilter} rating={filterRating} changeRatingFilter={changeRatingFilter} />
             </div>
             {toReturn}
         </div>

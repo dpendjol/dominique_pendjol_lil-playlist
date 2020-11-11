@@ -1,12 +1,16 @@
 import React from 'react'
 
-const FilterForm = ({genres, changeGenreFilter}) => {
+const FilterForm = ({genres, changeGenreFilter, changeRatingFilter, filterRating}) => {
 
     const handleChange = (e) => {
-        const id = e.target.id
-        const checked = e.target.checked
-
-        changeGenreFilter(id, checked)
+        if (e.target.type === "checkbox") { 
+            const id = e.target.id
+            const checked = e.target.checked
+            changeGenreFilter(id, checked)
+        } else {
+            const value = e.target.value
+            changeRatingFilter(value)
+        }
     }
 
     const allCheckBoxes = genres.map(genre => {
@@ -26,9 +30,20 @@ const FilterForm = ({genres, changeGenreFilter}) => {
 
     return (
         <div className="filter__container">
-            <ul>
+            <label htmlFor="filter__list"></label>
+            <ul id="filter__list">
                 {allCheckBoxes}
             </ul>
+
+            <label htmlFor="rating">Filter door rating</label>
+            <select id="rating" name="rating" value={filterRating} onChange={handleChange}>
+                <option value={0}>--Selecteer--</option>                
+                <option value={1}>1 ster</option>    
+                <option value={2}>2 sterren</option>    
+                <option value={3}>3 sterren</option>    
+                <option value={4}>4 sterren</option>                
+                <option value={5}>5 sterren</option>     
+            </select>
         </div>
     )
 }
