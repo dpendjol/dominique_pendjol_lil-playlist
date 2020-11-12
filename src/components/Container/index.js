@@ -1,5 +1,5 @@
 import React from 'react'
-import {useState, useEffect} from 'react'
+import {useEffect} from 'react'
 import {v4 as uuid} from 'uuid'
 
 import './container.css'
@@ -7,14 +7,18 @@ import './container.css'
 import SongList from '../SongList'
 import InputForm from '../InputForm'
 import FilterForm from '../FilterForm'
-import mySampleData from './mySampleData'
+
+import {useSelector, useDispatch} from 'react-redux'
+import { filterGenresNumber, filterRatingChange, songAdd, songDelete, uniqueGenresChange } from '../../0-Actions'
 
 const Container = () => {
-    const [songList, setSongList] = useState(mySampleData)
-    const [byGenre, setByGenre] = useState(false)
-    const [allGenres, setAllGenres] = useState([])
-    const [genresTrue, setGenresTrue] = useState(0)
-    const [filterRating, setFilterRating] = useState(0)
+    const dispatch = useDispatch()
+
+    const songList = useSelector(state => state.songList)
+    const filterGenres = useSelector(state => state.filterGenre)
+    const filterRating = useSelector(state => state.filterRating)
+    const displayByGenre = useSelector(state => state.displayByGenre)
+    const uniqueGenresList = useSelector(state => state.uniqueGenres)
     
     // Execute load of component filter assignment if a song is added
     useEffect(() => {
@@ -23,19 +27,16 @@ const Container = () => {
         uniqueGenres.forEach(genre => {
             arrObjGenres.push({id: uuid(), genre_name: [genre], value: false})
         })
-        setAllGenres(arrObjGenres)
+        dispatch(uniqueGenresChange((arrObjGenres)))
     },[songList])    
     //filter assignment
 
     // start add song assignment
-    const addSong = newSong => setSongList([...songList, newSong])
+    const addSong = newSong => dispatch(songAdd(newSong))
     // stop add song assignment
 
     // start delete song assignment
-    const deleteSong = (delSong) => {
-        const alteredSongList = songList.filter(song => song.id !== delSong)
-        setSongList(alteredSongList)
-    }
+    const deleteSong = songId => dispatch(songDelete(songId))
     // stop delete song assignment
 
     // CATEGORISEREN
@@ -73,7 +74,7 @@ const Container = () => {
  
         let displaySongs = [...songList]
        
-        if (byGenre) {
+        if (displayByGenre) {
             const songsByGenre = getSongsByGenre(getUniqueGenres(songList), songList)
             return (
                 <div className='SongListContainer'>
@@ -82,11 +83,11 @@ const Container = () => {
                     })}
                 </div>
             )
-        } else if (genresTrue > 0 || filterRating > 0) { 
+        } else if (filterGenres > 0 || filterRating > 0) { 
             
-            if (genresTrue > 0) {
+            if (filterGenres > 0) {
             
-            const compGenre = allGenres.reduce((trueValues, genre) => {
+            const compGenre = uniqueGenresList.reduce((trueValues, genre) => {
                 if (genre.value === true) {
                     // for some reason the genre.genre_name is a array, therefore a destructure before a push
                     trueValues.push(...genre.genre_name)
@@ -126,7 +127,7 @@ const Container = () => {
             )
         }
 
-        if (filterRating > 0 || genresTrue > 0) {
+        if (filterRating > 0 || filterGenres > 0) {
             return (
                 <div className='SongListContainer'>
                     <SongList songList={displaySongs} options={{delete: deleteSong}}></SongList>
@@ -145,24 +146,24 @@ const Container = () => {
      */
     const changeGenreFilter = (id, checked) => {
         
-        let number = checked === true ? genresTrue + 1 : genresTrue - 1
+        let number = checked === true ? filterGenres + 1 : filterGenres - 1
 
-        const alterdGenres = allGenres.map(genre => {
+        const alterdGenres = uniqueGenresList.map(genre => {
             if (genre.id === id) {
                 genre.value = checked
             } 
             return genre
         })
 
-        setGenresTrue(number)
-        setAllGenres(alterdGenres)
+        dispatch(filterGenresNumber(number))
+        dispatch(uniqueGenresChange(alterdGenres))
     }
 
     /**
      * Sets the state of filterRating
      * @param {Number} value the rating selected by the user
      */
-    const changeRatingFilter = value => setFilterRating(value)
+    const changeRatingFilter = value => dispatch(filterRatingChange(value))
     //filter assignment
 
 
@@ -175,7 +176,7 @@ const Container = () => {
                     addSong={addSong} 
                     />
                 <FilterForm 
-                    genres={allGenres} 
+                    genres={uniqueGenresList} 
                     changeGenreFilter={changeGenreFilter} 
                     rating={filterRating} 
                     changeRatingFilter={changeRatingFilter} 
