@@ -9,7 +9,7 @@ const About = () => {
         <h2 className="about__subtitle"> 
             Gebruik van React en React Router
         </h2>
-        <p className="about__paragraph">
+        <div> className="about__paragraph">
             Dit project is om te oefenen met het opzetten van een project met React om bekend te raken met de mogelijkheden hiervan.
             <h3>Mogelijkheden van deze app</h3>
             <ul>
@@ -22,7 +22,7 @@ const About = () => {
                 </li>
                 <li>Je kunt de lijst filteren (in beide views) op het genre en op de rating</li>
             </ul>
-        </p>
+        </div>
     </div>
     )
 }

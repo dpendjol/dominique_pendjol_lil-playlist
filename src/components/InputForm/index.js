@@ -4,7 +4,7 @@ import {v4 as uuid} from 'uuid'
 import './InputForm.css'
 
 import {connect} from 'react-redux'
-import {songAdd, uniqueGenresChange} from '../../0-Actions'
+import {songAdd} from '../../0-Actions'
 
 /** This component is connected to a Redux Store. It only makes use of the songAdd action */
 
@@ -73,7 +73,7 @@ class InputForm extends Component {
     render() {
         return (
             <div className="input__container">
-                {console.log('Unique Genres: ', this.props.uniqueGenres)}
+                {console.log(this.state)}
                 <label>Nieuw liedje invoeren <i className="fas fa-question-circle tooltip">
                 <span className="tooltiptext">Als het hele formulier is ingevuld, dan wordt de knop geactiveerd.</span></i>
                 </label>
@@ -117,7 +117,7 @@ class InputForm extends Component {
                         
                             this.props.uniqueGenres.map(genre => {
                                 const genreName = genre.genre_name.toString()
-                                return <option value={genreName}>{genreName}</option>
+                                return <option key={genre.id} value={genreName}>{genreName}</option>
                             })
                         
                         }
@@ -145,7 +145,7 @@ class InputForm extends Component {
                         <input
                             type="checkbox"
                             name="newGenre"
-                            value={this.state.newGenre}
+                            checked={this.state.newGenre}
                             onChange={this.handleChange}
                             />
                     </label>

@@ -50,6 +50,7 @@ const Container = () => {
                 return genres.includes(currentValue) ? genres : [...genres, currentValue]
         }, [])
         // sorting because it looks nicer
+        console.log('Get unique genres')
         return uniqueGenres.sort()
     }
 
