@@ -14,7 +14,6 @@ const FilterForm = ({genres, changeGenreFilter, changeRatingFilter, filterRating
             changeGenreFilter(id, checked)
         } else {
             const value = e.target.value
-            // changeRatingFilter(value)
             dispatch(filterRatingChange(value))
         }
     }

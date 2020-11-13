@@ -1,4 +1,4 @@
-.Container {
+.container {
     margin: 0 auto;
     width: 100%;
     display: grid;
@@ -7,18 +7,10 @@
     justify-items: stretch;
   }
 
-  .FormContainer {
+  .form__container {
     grid-column-start: 1;
   }
   
-  .SongListContainer {
+  .songlist__container {
     grid-column-start: 2;
   }
-
-  
-
-  
-
-  /* .SongListContainer {
-    width: 100%;
-  } */

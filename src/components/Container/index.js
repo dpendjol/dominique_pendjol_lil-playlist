@@ -30,8 +30,8 @@ const Container = () => {
      * Every time the state of the songList changes we have to check if there is no other
      */
     useEffect(() => {
-        const uniqueGenres = getUniqueGenres(songList)
         const arrObjGenres = []
+        const uniqueGenres = getUniqueGenres(songList)
         uniqueGenres.forEach(genre => {
             arrObjGenres.push({id: uuid(), genre_name: [genre], value: false})
         })
@@ -74,29 +74,22 @@ const Container = () => {
         let displaySongs = [...songList]
             
         if (filterGenres > 0) {
-        const compGenre = uniqueGenresList.reduce((trueValues, genre) => {
-            if (genre.value === true) {
-                // for some reason the genre.genre_name is a array, therefore a destructure before a push
-                trueValues.push(...genre.genre_name)
-            }
-            return trueValues
-        }, [])
+            const compGenre = uniqueGenresList.reduce((trueValues, genre) => {
+                if (genre.value === true) { trueValues.push(...genre.genre_name) }
+                return trueValues
+            }, [])
 
-        const listToBeDisplayed = songList.reduce((list, song) => {
-            if (compGenre.includes(song.genre)) {
-                list.push(song)
-            }
-            return list
-        },[])
-        
-        displaySongs = listToBeDisplayed
+            const listToBeDisplayed = songList.reduce((list, song) => {
+                if (compGenre.includes(song.genre)) { list.push(song) }
+                return list
+            },[])
+            
+            displaySongs = listToBeDisplayed
         }
             
         if (filterRating > 0) {    
             const listToBeDisplayed = displaySongs.reduce((list, song) => {
-                if (filterRating == song.rating) {
-                    list.push(song)
-                }
+                if (filterRating == song.rating) { list.push(song) }
                 return list
             },[])
         
@@ -104,10 +97,10 @@ const Container = () => {
         }
 
         if (displayByGenre) {
-            const songsByGenre = getSongsByGenre(getUniqueGenres(displaySongs), displaySongs)
+            const songsByGenre = getSongsByGenre( getUniqueGenres(displaySongs) , displaySongs )
             if (songsByGenre.length > 0) {
             return ( 
-                <div className='SongListContainer'>
+                <div className='songlist__container'>
                     {songsByGenre.map(genre => {
                         return <SongList 
                             key={genre.genre_name} 
@@ -127,7 +120,7 @@ const Container = () => {
         if (!displayByGenre) {
             if (displaySongs.length > 0) {
                 return ( 
-                    <div className='SongListContainer'>
+                    <div className='songlist__container'>
                         <SongList 
                             songList={displaySongs} 
                             ></SongList>
@@ -158,21 +151,21 @@ const Container = () => {
             return genre
         })
 
-        dispatch(filterGenresNumber(number))
-        dispatch(uniqueGenresChange(alterdGenres))
+        dispatch( filterGenresNumber(number) )
+        dispatch( uniqueGenresChange(alterdGenres) )
     }
 
     /**
      * Sets the state of filterRating
      * @param {Number} value the rating selected by the user
      */
-   const changeRatingFilter = value => dispatch(filterRatingChange(value))
+   const changeRatingFilter = value => dispatch( filterRatingChange(value) )
 
     const toBeDisplayed = displaySongList();
 
     return (
-        <div className="Container">
-            <div className='FormContainer'>
+        <div className="container">
+            <div className='form__container'>
                 <InputForm 
                     />
                 <FilterForm 
