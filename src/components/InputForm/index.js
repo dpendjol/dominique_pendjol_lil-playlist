@@ -4,7 +4,7 @@ import {v4 as uuid} from 'uuid'
 import './InputForm.css'
 
 import {connect} from 'react-redux'
-import {songAdd} from '../../0-Actions'
+import {songAdd, uniqueGenresChange} from '../../0-Actions'
 
 /** This component is connected to a Redux Store. It only makes use of the songAdd action */
 
@@ -19,7 +19,7 @@ class InputForm extends Component {
                 genre: '',
                 rating: 0
             },
-            newGenreCB: false,
+            newGenre: false,
         }
 
         this.handleClick = this.handleClick.bind(this)
@@ -46,36 +46,23 @@ class InputForm extends Component {
                     genre: '',
                     rating: 0
                 },
-                newGenreCB: false
+                newGenre: false
             }
         )
         event.preventDefault()
     }
 
     handleChange (event) {
-        const inputName = event.target.name
-        const inputValue = event.target.value
+        const {name, type} = event.target
 
         let returnObject = {}
-
-        // switch (inputName) {
-        //     case 'title':
-        //         returnObject = {song: {...this.state.song, title: inputValue} };
-        //         break;
-        //     case 'artist':
-        //         returnObject = {song: {...this.state.song, artist: inputValue} }
-        //         break;
-        //     case 'genre':
-        //         returnObject = {song: {...this.state.song, genre: inputValue} }
-        //         break;
-        //     case 'rating':
-        //         returnObject = {song: {...this.state.song, rating: inputValue} } 
-        //         break;
-        //     default:
-        //         return;
-        // }
-
-        returnObject = {song: {...this.state.song, [inputName]: inputValue} }
+        if (type !=="checkbox") {
+            const {value} = event.target
+            returnObject = {song: {...this.state.song, [name]: value} }
+        } else {
+            const {checked} = event.target
+            returnObject = { [name]: checked }
+        }
         
         console.log('State: ', this.state)
         console.log('Return Object: ', returnObject)
@@ -86,6 +73,7 @@ class InputForm extends Component {
     render() {
         return (
             <div className="input__container">
+                {console.log('Unique Genres: ', this.props.uniqueGenres)}
                 <label>Nieuw liedje invoeren</label>
                 <form 
                     className='input__form' 
@@ -117,12 +105,32 @@ class InputForm extends Component {
 
                     <label>
                         <span>Genre</span>
+                        <select>
+                        {
+                        
+                            this.props.uniqueGenres.map(genre => {
+                                const genreName = genre.genre_name.toString()
+                                return <option value={genreName}>{genreName}</option>
+                            })
+                        
+                        }
+                        </select>
+                        
                         <input 
                             type='text' 
                             name='genre' 
                             value={this.state.song.genre} 
                             onChange={this.handleChange} 
                             />
+                    </label>
+                    <label>
+                        <input
+                            type="checkbox"
+                            name="newGenre"
+                            value={this.state.newGenre}
+                            onChange={this.handleChange}
+                            />
+                        {!this.state.newGenre ? <span>add new genre</span> : null}
                     </label>
                     
                     <br />
@@ -190,10 +198,15 @@ class InputForm extends Component {
     }
 }
 
+const mapStateToProps = (state) => {
+    const uniqueGenres = state
+    return uniqueGenres
+}
+
 const mapDispatchToProps = () => {
     return {
         songAdd: songAdd
     }
 }
 
-export default connect(null, mapDispatchToProps())(InputForm)
+export default connect(mapStateToProps, mapDispatchToProps())(InputForm)
