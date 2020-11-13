@@ -67,8 +67,9 @@ class InputForm extends Component {
 
     render() {
         return (
+            <div className="input__container">
             <form 
-                className='InputForm' 
+                className='input__form' 
                 onSubmit={this.handleClick
                 }>
                 <label>
@@ -106,7 +107,7 @@ class InputForm extends Component {
                 </label>
                 
                 <br />
-
+                {console.log(typeof(this.state.rating))}
                 <label>
                     <span>Rating</span>
                     <label>
@@ -114,6 +115,7 @@ class InputForm extends Component {
                             type='radio' 
                             name='rating' 
                             value={1} 
+                            checked={this.state.rating === '1'}
                             onChange={this.handleChange} 
                             />
                         1
@@ -123,6 +125,7 @@ class InputForm extends Component {
                             type='radio' 
                             name='rating' 
                             value={2} 
+                            checked={this.state.rating === '2'}
                             onChange={this.handleChange} 
                             />
                         2
@@ -132,6 +135,7 @@ class InputForm extends Component {
                             type='radio' 
                             name='rating' 
                             value={3} 
+                            checked={this.state.rating === '3'}
                             onChange={this.handleChange} 
                             />
                         3
@@ -141,6 +145,7 @@ class InputForm extends Component {
                             type='radio' 
                             name='rating' 
                             value={4} 
+                            checked={this.state.rating === '4'}
                             onChange={this.handleChange} 
                             />
                         4
@@ -150,6 +155,7 @@ class InputForm extends Component {
                             type='radio' 
                             name='rating' 
                             value={5} 
+                            checked={this.state.rating === '5'}
                             onChange={this.handleChange} 
                             />
                         5
@@ -160,6 +166,7 @@ class InputForm extends Component {
                 
                 <button>Toevoegen</button>
             </form>
+            </div>
         )
     }
 }

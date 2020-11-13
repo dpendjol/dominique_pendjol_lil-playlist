@@ -9,7 +9,11 @@ import InputForm from '../InputForm'
 import FilterForm from '../FilterForm'
 
 import {useSelector, useDispatch} from 'react-redux'
-import { filterGenresNumber, filterRatingChange, songAdd, songDelete, uniqueGenresChange } from '../../0-Actions'
+import { filterGenresNumber, 
+        filterRatingChange, 
+        songAdd, 
+        songDelete, 
+        uniqueGenresChange } from '../../0-Actions'
 
 const Container = () => {
     const dispatch = useDispatch()
@@ -20,7 +24,9 @@ const Container = () => {
     const displayByGenre = useSelector(state => state.displayByGenre)
     const uniqueGenresList = useSelector(state => state.uniqueGenres)
     
-    // Execute load of component filter assignment if a song is added
+    /**
+     * Every time the state of the songList changes we have to check if there is no other
+     */
     useEffect(() => {
         const uniqueGenres = getUniqueGenres(songList)
         const arrObjGenres = []
@@ -70,64 +76,53 @@ const Container = () => {
     /**
      * Revisit for refactoring
      */
-    const arraySongList = () => {
+    const displaySongList = () => {
  
         let displaySongs = [...songList]
-       
-        if (displayByGenre) {
-            const songsByGenre = getSongsByGenre(getUniqueGenres(songList), songList)
-            return (
-                <div className='SongListContainer'>
-                    {songsByGenre.map(genre => {
-                        return <SongList genre={genre.genre_name} songList={genre.song} options={{delete: deleteSong}}></SongList>
-                    })}
-                </div>
-            )
-        } else if (filterGenres > 0 || filterRating > 0) { 
             
-            if (filterGenres > 0) {
-            
-            const compGenre = uniqueGenresList.reduce((trueValues, genre) => {
-                if (genre.value === true) {
-                    // for some reason the genre.genre_name is a array, therefore a destructure before a push
-                    trueValues.push(...genre.genre_name)
-                }
-                return trueValues
-            }, [])
-
-            const listToBeDisplayed = songList.reduce((list, song) => {
-                if (compGenre.includes(song.genre)) {
-                    list.push(song)
-                }
-                return list
-            },[])
-            
-            displaySongs = listToBeDisplayed
+        if (filterGenres > 0) {
+        const compGenre = uniqueGenresList.reduce((trueValues, genre) => {
+            if (genre.value === true) {
+                // for some reason the genre.genre_name is a array, therefore a destructure before a push
+                trueValues.push(...genre.genre_name)
             }
-            
-            
-            if (filterRating > 0) {
+            return trueValues
+        }, [])
 
+        const listToBeDisplayed = songList.reduce((list, song) => {
+            if (compGenre.includes(song.genre)) {
+                list.push(song)
+            }
+            return list
+        },[])
+        
+        displaySongs = listToBeDisplayed
+        }
             
+        if (filterRating > 0) {    
             const listToBeDisplayed = displaySongs.reduce((list, song) => {
                 if (filterRating == song.rating) {
                     list.push(song)
                 }
                 return list
             },[])
-         
-            displaySongs = listToBeDisplayed
-            }
+        
+        displaySongs = listToBeDisplayed
+        }
 
-        } else {
+        if (displayByGenre) {
+            // underneath line replaced songList by displaySongs
+            const songsByGenre = getSongsByGenre(getUniqueGenres(displaySongs), displaySongs)
             return (
                 <div className='SongListContainer'>
-                    <SongList songList={songList} options={{delete: deleteSong}}></SongList>
+                    {songsByGenre.map(genre => {
+                        return <SongList key={genre.genre_name} genre={genre.genre_name} songList={genre.song} options={{delete: deleteSong}}></SongList>
+                    })}
                 </div>
             )
         }
-
-        if (filterRating > 0 || filterGenres > 0) {
+    
+        if (!displayByGenre) {
             return (
                 <div className='SongListContainer'>
                     <SongList songList={displaySongs} options={{delete: deleteSong}}></SongList>
@@ -163,11 +158,11 @@ const Container = () => {
      * Sets the state of filterRating
      * @param {Number} value the rating selected by the user
      */
-    const changeRatingFilter = value => dispatch(filterRatingChange(value))
+   const changeRatingFilter = value => dispatch(filterRatingChange(value))
     //filter assignment
 
 
-    const toReturn = arraySongList();
+    const toBeDisplayed = displaySongList();
 
     return (
         <div className="Container">
@@ -182,7 +177,7 @@ const Container = () => {
                     changeRatingFilter={changeRatingFilter} 
                     />
             </div>
-            {toReturn}
+            {toBeDisplayed}
         </div>
     )
 }

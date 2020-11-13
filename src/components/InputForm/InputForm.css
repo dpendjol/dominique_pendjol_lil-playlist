@@ -1,14 +1,18 @@
-.InputForm {
-    width: 250px;
+.input__container {
+    margin: 10px;
+    padding: 5px;
+    border: 1px solid black;
+    background-color: rgba(255, 255, 255, 0.3);
+}
+.input__form {
     flex-wrap: wrap;
     flex-direction: column;
     justify-content: space-between;
-
-    border: 1px solid black;
-    padding: 10px;
+    
+    padding: 5px;
 }
 
-.InputForm > label {
+.input__form > label {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;

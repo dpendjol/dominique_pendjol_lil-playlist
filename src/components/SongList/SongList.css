@@ -1,8 +1,10 @@
-.SongList {
+.songlist {
     list-style: none;
-    margin: 0;
-    padding: 0;
-    width: 100%;
+    margin: 10px;
+    padding: 5px;
+    width: 90%;
+    border: 1px solid black;
+    background-color: rgba(255,255,255,0.3);
 }
 
 .ascending::after {
@@ -17,13 +19,30 @@
     content: "  \f0de";
 }
 
-.SongList > caption {
+.songlist caption {
     margin-top: 20px;
     font-size: 1.2rem;
     font-style: italic;
     text-decoration: underline;
+    color: whitesmoke;
+    font-weight: bold;
 }
 
-.SongList:first-child > caption {
+.songlist th {
+    width: 20%;
+    text-align: left;
+}
+
+.songlist thead tr {
+    font-style: italic;
+    background-color: rgba(0,0,0,0.4);
+    color: whitesmoke;
+}
+
+.songlist tbody tr:nth-child(odd) {
+    background-color: rgba(255,255,255,0.4);
+}
+
+.songlist:first-child > caption {
     margin-top: 0px;
 }

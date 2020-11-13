@@ -1,7 +1,12 @@
 import React, {useState} from 'react';
 import './SongList.css'
 
+import {useSelector} from 'react-redux'
+
 const SongList = ({ songList, options, genre}) => {
+
+    const displayByGenre = useSelector(state => state.displayByGenre)
+
     const [sortBy, setSortBy] = useState(null)
     const [sortOrder, setSortOrder] = useState(true)
     
@@ -47,7 +52,7 @@ const SongList = ({ songList, options, genre}) => {
             <tr key={song.id}>
                 <td>{song.title}</td>
                 <td>{song.artist}</td>
-                <td>{song.genre}</td>
+                {!displayByGenre ? <td>{song.genre}</td> : null}
                 <td>{song.rating}</td>
                 {options ? 
                         <td> 
@@ -67,14 +72,14 @@ const SongList = ({ songList, options, genre}) => {
     })
 
     return (
-        <table className='SongList'>
+        <table className='songlist'>
             <caption>{genre ? 'Alle liedjes in ' + genre : 'Alle liedjes'}</caption>
             <thead>
                 <tr>
                     <th 
                         onClick={() => sorting('title')} className={getClass('title')}>Titel</th>
                     <th onClick={() => sorting('artist')} className={getClass('artist')}>Artiest</th>
-                    <th onClick={() => sorting('genre')} className={getClass('genre')}>Genre</th>
+                    {!displayByGenre ? <th onClick={() => sorting('genre')} className={getClass('genre')}>Genre</th> : null }
                     <th onClick={() => sorting('rating')} className={getClass('rating')}>Rating</th>
                     {options ? <th> Options </th> : null}
                 </tr>

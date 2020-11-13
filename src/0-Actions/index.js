@@ -32,4 +32,11 @@ export const uniqueGenresChange = (newList) => {
     })
 }
 
+export const toggleDisplayMode = () => {
+    return ( {
+        type: 'displayByGenre/toggle',
+        payload: null
+    })
+}
+
 export default {}

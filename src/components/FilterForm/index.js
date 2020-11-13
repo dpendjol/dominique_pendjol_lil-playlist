@@ -1,6 +1,11 @@
 import React from 'react'
 
+import './FilterForm.css'
+import {useDispatch} from 'react-redux'
+import {filterRatingChange} from '../../0-Actions'
+
 const FilterForm = ({genres, changeGenreFilter, changeRatingFilter, filterRating}) => {
+    const dispatch = useDispatch()
 
     const handleChange = (e) => {
         if (e.target.type === "checkbox") { 
@@ -9,7 +14,8 @@ const FilterForm = ({genres, changeGenreFilter, changeRatingFilter, filterRating
             changeGenreFilter(id, checked)
         } else {
             const value = e.target.value
-            changeRatingFilter(value)
+            // changeRatingFilter(value)
+            dispatch(filterRatingChange(value))
         }
     }
 
@@ -30,12 +36,12 @@ const FilterForm = ({genres, changeGenreFilter, changeRatingFilter, filterRating
 
     return (
         <div className="filter__container">
-            <label htmlFor="filter__list"></label>
-            <ul id="filter__list">
+            <label htmlFor="filter__list">Filter lijst door genre</label>
+            <ul id="filter__list" className="filter__list">
                 {allCheckBoxes}
             </ul>
 
-            <label htmlFor="filter__rating">Filter door rating</label>
+            <label htmlFor="filter__rating">Filter lijst door rating</label>
             <select id="filter__rating" name="filter__rating" value={filterRating} onChange={handleChange}>
                 <option value={0}>--Selecteer--</option>                
                 <option value={1}>1 ster</option>    

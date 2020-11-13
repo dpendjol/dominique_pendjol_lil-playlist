@@ -3,7 +3,14 @@ import React from 'react'
 import './Nav.css'
 import {NavLink} from 'react-router-dom'
 
+import {useDispatch} from 'react-redux'
+import { toggleDisplayMode } from '../../0-Actions'
+
 const Nav = () => {
+    const dispatch = useDispatch()
+
+
+
     return (
         <nav className="navigation">
             <h3>Navigatie:</h3>
@@ -17,6 +24,7 @@ const Nav = () => {
                     </li>
                 </NavLink>
             </ul>
+            <button onClick={() => dispatch( toggleDisplayMode() )}> Toggle view </button>
         </nav>
     )
 }
