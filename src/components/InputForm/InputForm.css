@@ -18,3 +18,14 @@
     justify-content: space-between;
 }
 
+.input__container > label {
+    color: whitesmoke;
+    font-weight: bold;
+    font-style: italic;
+    text-decoration: underline;
+    display: block;
+    font-size: 0.9rem;
+    background-color: rgba(0,0,0,0.3);
+    padding: 2px 2px;
+}
+

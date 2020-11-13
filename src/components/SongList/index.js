@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import './SongList.css'
 
+import {v4 as uuid} from 'uuid';
+
 import {useSelector} from 'react-redux'
 
 const SongList = ({ songList, options, genre}) => {
@@ -39,6 +41,14 @@ const SongList = ({ songList, options, genre}) => {
         }
     }
 
+    const getStars = (number) => {
+        let stars = [];
+        for (let i = 0; i < number; i++) {
+            stars.push(<i key={uuid()} className="fas fa-star"></i>);
+        }
+        return stars
+    }
+
     if (sortBy !== null) {
         sortedSongList.sort((a,b) => {
             if (a[sortBy] < b[sortBy]) return sortOrder ? -1 : 1
@@ -52,8 +62,8 @@ const SongList = ({ songList, options, genre}) => {
             <tr key={song.id}>
                 <td>{song.title}</td>
                 <td>{song.artist}</td>
+                <td>{getStars(song.rating)}</td>
                 {!displayByGenre ? <td>{song.genre}</td> : null}
-                <td>{song.rating}</td>
                 {options ? 
                         <td> 
                         <button 
@@ -76,11 +86,10 @@ const SongList = ({ songList, options, genre}) => {
             <caption>{genre ? 'Alle liedjes in ' + genre : 'Alle liedjes'}</caption>
             <thead>
                 <tr>
-                    <th 
-                        onClick={() => sorting('title')} className={getClass('title')}>Titel</th>
+                    <th onClick={() => sorting('title')} className={getClass('title')}>Titel</th>
                     <th onClick={() => sorting('artist')} className={getClass('artist')}>Artiest</th>
-                    {!displayByGenre ? <th onClick={() => sorting('genre')} className={getClass('genre')}>Genre</th> : null }
                     <th onClick={() => sorting('rating')} className={getClass('rating')}>Rating</th>
+                    {!displayByGenre ? <th onClick={() => sorting('genre')} className={getClass('genre')}>Genre</th> : null }
                     {options ? <th> Options </th> : null}
                 </tr>
             </thead>

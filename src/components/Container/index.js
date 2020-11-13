@@ -7,6 +7,7 @@ import './container.css'
 import SongList from '../SongList'
 import InputForm from '../InputForm'
 import FilterForm from '../FilterForm'
+import Message from '../Message'
 
 import {useSelector, useDispatch} from 'react-redux'
 import { filterGenresNumber, 
@@ -18,6 +19,9 @@ import { filterGenresNumber,
 const Container = () => {
     const dispatch = useDispatch()
 
+    /**
+     * Set all states
+     */
     const songList = useSelector(state => state.songList)
     const filterGenres = useSelector(state => state.filterGenre)
     const filterRating = useSelector(state => state.filterRating)
@@ -35,16 +39,13 @@ const Container = () => {
         })
         dispatch(uniqueGenresChange((arrObjGenres)))
     },[songList])    
-    //filter assignment
-
+    
     // start add song assignment
     const addSong = newSong => dispatch(songAdd(newSong))
-    // stop add song assignment
-
+    
     // start delete song assignment
     const deleteSong = songId => dispatch(songDelete(songId))
-    // stop delete song assignment
-
+    
     // CATEGORISEREN
     /**
      * Get a list of all genres, one entry per genre
@@ -56,8 +57,8 @@ const Container = () => {
             .reduce((genres, currentValue) => {
                 return genres.includes(currentValue) ? genres : [...genres, currentValue]
         }, [])
-
-        return uniqueGenres
+        // sorting because it looks nicer
+        return uniqueGenres.sort()
     }
 
     /**
@@ -111,28 +112,45 @@ const Container = () => {
         }
 
         if (displayByGenre) {
-            // underneath line replaced songList by displaySongs
             const songsByGenre = getSongsByGenre(getUniqueGenres(displaySongs), displaySongs)
-            return (
+            if (songsByGenre.length > 0) {
+            return ( 
                 <div className='SongListContainer'>
                     {songsByGenre.map(genre => {
-                        return <SongList key={genre.genre_name} genre={genre.genre_name} songList={genre.song} options={{delete: deleteSong}}></SongList>
+                        return <SongList 
+                            key={genre.genre_name} 
+                            genre={genre.genre_name} 
+                            songList={genre.song} 
+                            options={{delete: deleteSong}}
+                            ></SongList>
                     })}
                 </div>
             )
+                } else {
+                    return (
+                        <Message />
+                    )
+                }
         }
     
         if (!displayByGenre) {
-            return (
-                <div className='SongListContainer'>
-                    <SongList songList={displaySongs} options={{delete: deleteSong}}></SongList>
-                </div>
-            )
+            if (displaySongs.length > 0) {
+                return ( 
+                    <div className='SongListContainer'>
+                        <SongList 
+                            songList={displaySongs} 
+                            options={{delete: deleteSong}}
+                            ></SongList>
+                    </div>
+                )
+            } else {
+                return (
+                    <Message />
+                )
+            }           
         }
     }
-    //  CATEGORISEREN
 
-    // filter assignment
     /**
      * Sets a array in the state for the genres that need to be displayed
      * Also sets the number of genres that needs to be displayed
@@ -159,8 +177,6 @@ const Container = () => {
      * @param {Number} value the rating selected by the user
      */
    const changeRatingFilter = value => dispatch(filterRatingChange(value))
-    //filter assignment
-
 
     const toBeDisplayed = displaySongList();
 
