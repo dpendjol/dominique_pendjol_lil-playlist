@@ -13,10 +13,13 @@ class InputForm extends Component {
         super(props)
 
         this.state = {
-            title: '',
-            artist: '',
-            genre: '',
-            rating: 0
+            song: {
+                title: '',
+                artist: '',
+                genre: '',
+                rating: 0
+            },
+            newGenreCB: false,
         }
 
         this.handleClick = this.handleClick.bind(this)
@@ -28,19 +31,22 @@ class InputForm extends Component {
         this.props.songAdd( 
             { 
                 id: uuid(),
-                title: this.state.title,
-                artist: this.state.artist,
-                genre: this.state.genre.toLocaleLowerCase(),
-                rating: this.state.rating
+                title: this.state.song.title,
+                artist: this.state.song.artist,
+                genre: this.state.song.genre.toLocaleLowerCase(),
+                rating: this.state.song.rating
             }
         )
 
         this.setState(
             {
-                title: '',
-                artist: '',
-                genre: '',
-                rating: 0
+                song: {
+                    title: '',
+                    artist: '',
+                    genre: '',
+                    rating: 0
+                },
+                newGenreCB: false
             }
         )
         event.preventDefault()
@@ -52,22 +58,28 @@ class InputForm extends Component {
 
         let returnObject = {}
 
-        switch (inputName) {
-            case 'title':
-                returnObject = {title: inputValue};
-                break;
-            case 'artist':
-                returnObject = {artist: inputValue}
-                break;
-            case 'genre':
-                returnObject = {genre: inputValue}
-                break;
-            case 'rating':
-                returnObject = {rating: inputValue}
-                break;
-            default:
-                return;
-        }
+        // switch (inputName) {
+        //     case 'title':
+        //         returnObject = {song: {...this.state.song, title: inputValue} };
+        //         break;
+        //     case 'artist':
+        //         returnObject = {song: {...this.state.song, artist: inputValue} }
+        //         break;
+        //     case 'genre':
+        //         returnObject = {song: {...this.state.song, genre: inputValue} }
+        //         break;
+        //     case 'rating':
+        //         returnObject = {song: {...this.state.song, rating: inputValue} } 
+        //         break;
+        //     default:
+        //         return;
+        // }
+
+        returnObject = {song: {...this.state.song, [inputName]: inputValue} }
+        
+        console.log('State: ', this.state)
+        console.log('Return Object: ', returnObject)
+        
         this.setState(returnObject)
     }
 
@@ -84,7 +96,7 @@ class InputForm extends Component {
                         <input 
                             type='text' 
                             name='title' 
-                            value={this.state.title} 
+                            value={this.state.song.title} 
                             onChange={this.handleChange} 
                             />
                     </label>
@@ -96,7 +108,7 @@ class InputForm extends Component {
                         <input 
                             type='text' 
                             name='artist' 
-                            value={this.state.artist} 
+                            value={this.state.song.artist} 
                             onChange={this.handleChange} 
                             />
                     </label>
@@ -108,7 +120,7 @@ class InputForm extends Component {
                         <input 
                             type='text' 
                             name='genre' 
-                            value={this.state.genre} 
+                            value={this.state.song.genre} 
                             onChange={this.handleChange} 
                             />
                     </label>
@@ -122,7 +134,7 @@ class InputForm extends Component {
                                 type='radio' 
                                 name='rating' 
                                 value={1} 
-                                checked={this.state.rating === '1'}
+                                checked={this.state.song.rating === '1'}
                                 onChange={this.handleChange} 
                                 />
                             1
@@ -132,7 +144,7 @@ class InputForm extends Component {
                                 type='radio' 
                                 name='rating' 
                                 value={2} 
-                                checked={this.state.rating === '2'}
+                                checked={this.state.song.rating === '2'}
                                 onChange={this.handleChange} 
                                 />
                             2
@@ -142,7 +154,7 @@ class InputForm extends Component {
                                 type='radio' 
                                 name='rating' 
                                 value={3} 
-                                checked={this.state.rating === '3'}
+                                checked={this.state.song.rating === '3'}
                                 onChange={this.handleChange} 
                                 />
                             3
@@ -152,7 +164,7 @@ class InputForm extends Component {
                                 type='radio' 
                                 name='rating' 
                                 value={4} 
-                                checked={this.state.rating === '4'}
+                                checked={this.state.song.rating === '4'}
                                 onChange={this.handleChange} 
                                 />
                             4
@@ -162,7 +174,7 @@ class InputForm extends Component {
                                 type='radio' 
                                 name='rating' 
                                 value={5} 
-                                checked={this.state.rating === '5'}
+                                checked={this.state.song.rating === '5'}
                                 onChange={this.handleChange} 
                                 />
                             5
