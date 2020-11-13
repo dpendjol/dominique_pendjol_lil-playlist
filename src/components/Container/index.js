@@ -12,8 +12,6 @@ import Message from '../Message'
 import {useSelector, useDispatch} from 'react-redux'
 import { filterGenresNumber, 
         filterRatingChange, 
-        songAdd, 
-        songDelete, 
         uniqueGenresChange } from '../../0-Actions'
 
 const Container = () => {
@@ -39,12 +37,6 @@ const Container = () => {
         })
         dispatch(uniqueGenresChange((arrObjGenres)))
     },[songList])    
-    
-    // start add song assignment
-    const addSong = newSong => dispatch(songAdd(newSong))
-    
-    // start delete song assignment
-    const deleteSong = songId => dispatch(songDelete(songId))
     
     // CATEGORISEREN
     /**
@@ -121,7 +113,6 @@ const Container = () => {
                             key={genre.genre_name} 
                             genre={genre.genre_name} 
                             songList={genre.song} 
-                            options={{delete: deleteSong}}
                             ></SongList>
                     })}
                 </div>
@@ -139,7 +130,6 @@ const Container = () => {
                     <div className='SongListContainer'>
                         <SongList 
                             songList={displaySongs} 
-                            options={{delete: deleteSong}}
                             ></SongList>
                     </div>
                 )
@@ -184,7 +174,6 @@ const Container = () => {
         <div className="Container">
             <div className='FormContainer'>
                 <InputForm 
-                    addSong={addSong} 
                     />
                 <FilterForm 
                     genres={uniqueGenresList} 

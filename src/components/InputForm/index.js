@@ -3,6 +3,11 @@ import {Component} from 'react'
 import {v4 as uuid} from 'uuid'
 import './InputForm.css'
 
+import {connect} from 'react-redux'
+import {songAdd} from '../../0-Actions'
+
+/** This component is connected to a Redux Store. It only makes use of the songAdd action */
+
 class InputForm extends Component {
     constructor(props) {
         super(props)
@@ -18,8 +23,9 @@ class InputForm extends Component {
         this.handleChange = this.handleChange.bind(this)
     }
 
+    
     handleClick (event) {
-        this.props.addSong( 
+        this.props.songAdd( 
             { 
                 id: uuid(),
                 title: this.state.title,
@@ -172,4 +178,10 @@ class InputForm extends Component {
     }
 }
 
-export default InputForm
+const mapDispatchToProps = () => {
+    return {
+        songAdd: songAdd
+    }
+}
+
+export default connect(null, mapDispatchToProps())(InputForm)

@@ -3,9 +3,11 @@ import './SongList.css'
 
 import {v4 as uuid} from 'uuid';
 
-import {useSelector} from 'react-redux'
+import {useSelector, useDispatch} from 'react-redux'
+import {songDelete} from '../../0-Actions'
 
-const SongList = ({ songList, options, genre}) => {
+const SongList = ({ songList, genre}) => {
+    const dispatch = useDispatch()
 
     const displayByGenre = useSelector(state => state.displayByGenre)
 
@@ -24,11 +26,7 @@ const SongList = ({ songList, options, genre}) => {
     }
 
     const handleClickDelete = (event) => {
-        options.delete(event.target.value)
-    }
-
-    const handleClickEdit = () => {
-
+        dispatch(songDelete(event.target.value))
     }
 
     const getClass = (column) => {
@@ -64,19 +62,15 @@ const SongList = ({ songList, options, genre}) => {
                 <td>{song.artist}</td>
                 <td>{getStars(song.rating)}</td>
                 {!displayByGenre ? <td>{song.genre}</td> : null}
-                {options ? 
-                        <td> 
-                        <button 
-                            value={song.id} 
-                            onClick={handleClickDelete}
-                            >
-                                delete
-                        </button>
-                        {/* <button onClick={handleClickEdit}>edit</button>  */}
-                        </td> 
-                    : 
-                        null
-                    }
+                <td> 
+                    <button 
+                        value={song.id} 
+                        onClick={handleClickDelete}
+                        >
+                            delete
+                    </button>
+                </td> 
+                
             </tr>
         )
     })
@@ -90,7 +84,7 @@ const SongList = ({ songList, options, genre}) => {
                     <th onClick={() => sorting('artist')} className={getClass('artist')}>Artiest</th>
                     <th onClick={() => sorting('rating')} className={getClass('rating')}>Rating</th>
                     {!displayByGenre ? <th onClick={() => sorting('genre')} className={getClass('genre')}>Genre</th> : null }
-                    {options ? <th> Options </th> : null}
+                    <th> Options </th>
                 </tr>
             </thead>
             <tbody>
