@@ -57,15 +57,15 @@ class InputForm extends Component {
 
         let returnObject = {}
         if (type !=="checkbox") {
-            const {value} = event.target
+            let {value} = event.target
+            value = value === " " ? "" : value 
             returnObject = {song: {...this.state.song, [name]: value} }
         } else {
             const {checked} = event.target
-            returnObject = { [name]: checked }
+            returnObject = { song: {...this.state.song, genre: ""},
+                            [name]: checked
+                            }
         }
-        
-        console.log('State: ', this.state)
-        console.log('Return Object: ', returnObject)
         
         this.setState(returnObject)
     }
@@ -74,7 +74,9 @@ class InputForm extends Component {
         return (
             <div className="input__container">
                 {console.log('Unique Genres: ', this.props.uniqueGenres)}
-                <label>Nieuw liedje invoeren</label>
+                <label>Nieuw liedje invoeren <i className="fas fa-question-circle tooltip">
+                <span className="tooltiptext">Als het hele formulier is ingevuld, dan wordt de knop geactiveerd.</span></i>
+                </label>
                 <form 
                     className='input__form' 
                     onSubmit={this.handleClick
@@ -105,7 +107,12 @@ class InputForm extends Component {
 
                     <label>
                         <span>Genre</span>
-                        <select>
+                        <select 
+                            name="genre" 
+                            value={this.state.song.genre} 
+                            onChange={this.handleChange} 
+                            disabled={this.state.newGenre}>
+                            <option value="">--Geen selectie--</option>
                         {
                         
                             this.props.uniqueGenres.map(genre => {
@@ -116,21 +123,31 @@ class InputForm extends Component {
                         }
                         </select>
                         
-                        <input 
-                            type='text' 
-                            name='genre' 
-                            value={this.state.song.genre} 
-                            onChange={this.handleChange} 
-                            />
+                        {this.state.newGenre ? 
+                        <label>Voeg toe
+                            <input 
+                                type='text' 
+                                name='genre' 
+                                value={this.state.song.genre} 
+                                onChange={this.handleChange} 
+                                />
+                        </label>
+                            :
+                            null
+                        }
                     </label>
                     <label>
+                    {!this.state.newGenre ? 
+                            <span className="text__small">Voeg nieuw genre toe</span> 
+                            : 
+                            <span className="text__small">toch niet...</span>
+                            }
                         <input
                             type="checkbox"
                             name="newGenre"
                             value={this.state.newGenre}
                             onChange={this.handleChange}
                             />
-                        {!this.state.newGenre ? <span>add new genre</span> : null}
                     </label>
                     
                     <br />
@@ -191,7 +208,13 @@ class InputForm extends Component {
 
                     <br />
                     
-                    <button>Toevoegen</button>
+                    <button disabled={
+                        !(this.state.song.title !== "" &&
+                        this.state.song.artist !== "" &&
+                        this.state.song.genre !== "" &&
+                        this.state.song.rating !== 0)
+                        }
+                    >Toevoegen</button>
                 </form>
             </div>
         )
