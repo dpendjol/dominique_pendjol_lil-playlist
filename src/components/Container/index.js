@@ -48,7 +48,6 @@ const Container = () => {
             .reduce((genres, currentValue) => {
                 return genres.includes(currentValue) ? genres : [...genres, currentValue]
         }, [])
-        // sorting because it looks nicer
         return uniqueGenres.sort()
     }
 
@@ -69,7 +68,7 @@ const Container = () => {
     }
 
     /**
-     * Revisit for refactoring
+     * Render the songlist to be displayed on the screen
      */
     const displaySongList = () => {
  
@@ -136,27 +135,6 @@ const Container = () => {
         }           
 
     }
-
-    /**
-     * Sets a array in the state for the genres that need to be displayed
-     * Also sets the number of genres that needs to be displayed
-     * @param {String} id uuidV4 string
-     * @param {Boolean} checked value of checkbox
-     */
-    // const changeGenreFilter = (id, checked) => {
-        
-    //     let number = checked === true ? filterGenres + 1 : filterGenres - 1
-
-    //     const alterdGenres = uniqueGenresList.map(genre => {
-    //         if (genre.id === id) {
-    //             genre.value = checked
-    //         } 
-    //         return genre
-    //     })
-
-    //     dispatch( filterGenresNumber(number) )
-    //     dispatch( uniqueGenresChange(alterdGenres) )
-    // }
 
     const toBeDisplayed = displaySongList();
 
