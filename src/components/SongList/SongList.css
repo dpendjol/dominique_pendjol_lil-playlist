@@ -19,7 +19,12 @@
 }
 
 .songlist__container th {
+  width: 20%;
   text-align: left;
+}
+
+.songlist__container th:last-child {
+  width: 5%;
 }
 
 .songlist__container thead tr {
@@ -34,7 +39,10 @@
 
 .songlist__container tbody tr td:nth-child(3) {
   min-width: 100px;
-  background-color: orange;
+}
+
+.songlist__container tbody td:last-child {
+  text-align: center;
 }
 
 .songlist__container:first-child > caption {

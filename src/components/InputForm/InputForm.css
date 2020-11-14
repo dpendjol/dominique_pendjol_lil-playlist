@@ -5,6 +5,17 @@
   background-color: rgba(255, 255, 255, 0.3);
 }
 
+.input__container > label {
+  color: whitesmoke;
+  font-weight: bold;
+  font-style: italic;
+  text-decoration: underline;
+  display: block;
+  font-size: 0.9rem;
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 2px 2px;
+}
+
 .input__form {
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
@@ -29,66 +40,36 @@
           justify-content: space-between;
 }
 
-.input__container > label {
-  color: whitesmoke;
-  font-weight: bold;
-  font-style: italic;
-  text-decoration: underline;
-  display: block;
+.input__buttoncontainer {
   font-size: 0.9rem;
-  background-color: rgba(0, 0, 0, 0.3);
-  padding: 2px 2px;
 }
 
 .text__small {
   font-size: 0.7rem;
 }
 
-.input__buttoncontainer {
-  font-size: 0.9rem;
-}
-
-.filter__container > select {
-  margin-bottom: 15px;
-}
-
-.tooltip {
+.questionmark {
   position: relative;
   display: inline-block;
-  border-bottom: 1px dotted black;
+  -ms-flex-item-align: end;
+      -ms-grid-row-align: end;
+      align-self: end;
 }
 
-.tooltip .tooltiptext {
+.questionmark .questiontext {
   visibility: hidden;
-  width: 120px;
-  background-color: #555;
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 5px 0;
+  width: 12rem;
+  background-color: whitesmoke;
+  color: black;
+  border-radius: 5px;
+  padding: 5px;
   position: absolute;
   z-index: 1;
-  bottom: 125%;
-  left: 50%;
-  margin-left: -60px;
-  opacity: 0;
-  -webkit-transition: opacity 0.3s;
-  transition: opacity 0.3s;
+  bottom: 0;
+  left: 100%;
 }
 
-.tooltip .tooltiptext::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: #555 transparent transparent transparent;
-}
-
-.tooltip:hover .tooltiptext {
+.questionmark:hover .questiontext {
   visibility: visible;
-  opacity: 1;
 }
 /*# sourceMappingURL=InputForm.css.map */

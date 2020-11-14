@@ -16,7 +16,11 @@
         font-weight: bold;
     }
     & th {
+        width: 20%;
         text-align: left;
+    }
+    & th:last-child{
+        width: 5%;
     }
     & thead tr {
         font-style: italic;
@@ -30,8 +34,10 @@
         & tr {
             & td:nth-child(3) {
                 min-width: 100px;
-                background-color: orange;
             }
+        }
+        & td:last-child{
+            text-align: center;
         }
     }
     &:first-child > caption {
