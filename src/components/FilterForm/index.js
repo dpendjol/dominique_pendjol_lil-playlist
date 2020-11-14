@@ -14,7 +14,6 @@ const FilterForm = () => {
     const songList = useSelector(state => state.songList)
 
     useEffect( () => {
-        console.log('reset filter form')
         dispatch( filterRatingReset() )   
     }, [songList, dispatch])
 

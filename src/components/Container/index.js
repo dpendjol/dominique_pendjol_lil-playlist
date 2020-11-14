@@ -75,7 +75,9 @@ const Container = () => {
  
         let displaySongs = [...songList]
             
-        if (uniqueGenresList.map(genre => genre.value).includes(true)) {
+        if (uniqueGenresList
+            .map(genre => genre.value)
+            .includes(true)) {
             const compGenre = uniqueGenresList.reduce((trueValues, genre) => {
                 if (genre.value === true) { trueValues.push(genre.genre_name) }
                 return trueValues
