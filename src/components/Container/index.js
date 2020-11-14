@@ -10,9 +10,7 @@ import FilterForm from '../FilterForm'
 import Message from '../Message'
 
 import {useSelector, useDispatch} from 'react-redux'
-import { filterGenresNumber, 
-        filterRatingChange, 
-        uniqueGenresChange } from '../../0-Actions'
+import { uniqueGenresChangeAll } from '../../0-Actions'
 
 const Container = () => {
     const dispatch = useDispatch()
@@ -21,7 +19,6 @@ const Container = () => {
      * Set all states
      */
     const songList = useSelector(state => state.songList)
-    const filterGenres = useSelector(state => state.filterGenre)
     const filterRating = useSelector(state => state.filterRating)
     const displayByGenre = useSelector(state => state.displayByGenre)
     const uniqueGenresList = useSelector(state => state.uniqueGenres)
@@ -33,11 +30,12 @@ const Container = () => {
         const arrObjGenres = []
         getUniqueGenres(songList)
             .forEach(genre => {
-                console.log(genre)
                 arrObjGenres.push({id: uuid(), genre_name: genre, value: false})
             })
-        dispatch(uniqueGenresChange((arrObjGenres)))
-    },[songList])    
+
+        // Dispatch the change
+        dispatch( uniqueGenresChangeAll(arrObjGenres) )
+    },[songList, dispatch])
     
     // CATEGORISEREN
     /**
@@ -51,7 +49,6 @@ const Container = () => {
                 return genres.includes(currentValue) ? genres : [...genres, currentValue]
         }, [])
         // sorting because it looks nicer
-        console.log(uniqueGenres)
         return uniqueGenres.sort()
     }
 
@@ -63,7 +60,10 @@ const Container = () => {
     const getSongsByGenre = (uniqueGenres, songList) => {
         let array = [];
         uniqueGenres.forEach(genre => {
-            array.push({genre_name: genre, song: songList.filter(song => song.genre.toLowerCase() === genre.toLowerCase())})
+            array.push({
+                genre_name: genre, 
+                song: songList.filter(song =>
+                    song.genre.toLowerCase() === genre.toLowerCase())})
         })
         return array
     }
@@ -75,9 +75,9 @@ const Container = () => {
  
         let displaySongs = [...songList]
             
-        if (filterGenres > 0) {
+        if (uniqueGenresList.map(genre => genre.value).includes(true)) {
             const compGenre = uniqueGenresList.reduce((trueValues, genre) => {
-                if (genre.value === true) { trueValues.push(...genre.genre_name) }
+                if (genre.value === true) { trueValues.push(genre.genre_name) }
                 return trueValues
             }, [])
 
@@ -91,7 +91,7 @@ const Container = () => {
             
         if (filterRating > 0) {    
             const listToBeDisplayed = displaySongs.reduce((list, song) => {
-                if (filterRating == song.rating) { list.push(song) }
+                if (parseInt(filterRating, 10) === song.rating) { list.push(song) }
                 return list
             },[])
         
@@ -118,22 +118,21 @@ const Container = () => {
                     )
                 }
         }
-    
-        if (!displayByGenre) {
-            if (displaySongs.length > 0) {
-                return ( 
-                    <div className='songlist__container'>
-                        <SongList 
-                            songList={displaySongs} 
-                            ></SongList>
-                    </div>
-                )
-            } else {
-                return (
-                    <Message />
-                )
-            }           
-        }
+
+        if (displaySongs.length > 0) {
+            return ( 
+                <div className='songlist__container'>
+                    <SongList 
+                        songList={displaySongs} 
+                        ></SongList>
+                </div>
+            )
+        } else {
+            return (
+                <Message />
+            )
+        }           
+
     }
 
     /**
@@ -142,26 +141,20 @@ const Container = () => {
      * @param {String} id uuidV4 string
      * @param {Boolean} checked value of checkbox
      */
-    const changeGenreFilter = (id, checked) => {
+    // const changeGenreFilter = (id, checked) => {
         
-        let number = checked === true ? filterGenres + 1 : filterGenres - 1
+    //     let number = checked === true ? filterGenres + 1 : filterGenres - 1
 
-        const alterdGenres = uniqueGenresList.map(genre => {
-            if (genre.id === id) {
-                genre.value = checked
-            } 
-            return genre
-        })
+    //     const alterdGenres = uniqueGenresList.map(genre => {
+    //         if (genre.id === id) {
+    //             genre.value = checked
+    //         } 
+    //         return genre
+    //     })
 
-        dispatch( filterGenresNumber(number) )
-        dispatch( uniqueGenresChange(alterdGenres) )
-    }
-
-    /**
-     * Sets the state of filterRating
-     * @param {Number} value the rating selected by the user
-     */
-   const changeRatingFilter = value => dispatch( filterRatingChange(value) )
+    //     dispatch( filterGenresNumber(number) )
+    //     dispatch( uniqueGenresChange(alterdGenres) )
+    // }
 
     const toBeDisplayed = displaySongList();
 
@@ -171,10 +164,6 @@ const Container = () => {
                 <InputForm 
                     />
                 <FilterForm 
-                    genres={uniqueGenresList} 
-                    changeGenreFilter={changeGenreFilter} 
-                    rating={filterRating} 
-                    changeRatingFilter={changeRatingFilter} 
                     />
             </div>
             {toBeDisplayed}

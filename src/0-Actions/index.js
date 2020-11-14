@@ -12,12 +12,13 @@ export const songDelete = (songId) => {
     }
 }
 
-export const filterGenresNumber = (numOfGenres) => {
+export const filterRatingReset = () => {
     return ( {
-        type: 'filterGenre',
-        payload: numOfGenres
-    } )
+        type: 'filterRating/reset',
+        payload: null
+    })
 }
+
 export const filterRatingChange = (ratingValue) => {
     return ( {
         type: 'filterRating/change',
@@ -25,10 +26,17 @@ export const filterRatingChange = (ratingValue) => {
     })
 }
 
-export const uniqueGenresChange = (newList) => {
+export const uniqueGenresChangeAll = (fullList) => {
+    return ( {
+        type: 'uniqueGenres/changeAll',
+        payload: fullList
+    })
+}
+
+export const uniqueGenresChange = (id, checked) => {
     return ( {
         type: 'uniqueGenres/change',
-        payload: newList
+        payload: {id, checked}
     })
 }
 
@@ -38,5 +46,3 @@ export const toggleDisplayMode = () => {
         payload: null
     })
 }
-
-export default {}

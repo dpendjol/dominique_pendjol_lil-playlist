@@ -1,24 +1,35 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 
 import './FilterForm.css'
-import {useDispatch} from 'react-redux'
-import {filterRatingChange} from '../../0-Actions'
+import {useDispatch, useSelector} from 'react-redux'
+import {filterRatingChange, 
+        filterRatingReset,
+        uniqueGenresChange} from '../../0-Actions'
 
-const FilterForm = ({genres, changeGenreFilter, changeRatingFilter, filterRating}) => {
+const FilterForm = () => {
     const dispatch = useDispatch()
+
+    const uniqueGenres = useSelector(state => state.uniqueGenres)
+    const filterRating = useSelector(state => state.filterRating)
+    const songList = useSelector(state => state.songList)
+
+    useEffect( () => {
+        console.log('reset filter form')
+        dispatch( filterRatingReset() )   
+    }, [songList, dispatch])
 
     const handleChange = (e) => {
         if (e.target.type === "checkbox") { 
             const id = e.target.id
             const checked = e.target.checked
-            changeGenreFilter(id, checked)
+            dispatch( uniqueGenresChange(id, checked) )
         } else {
             const value = e.target.value
             dispatch(filterRatingChange(value))
         }
     }
 
-    const allCheckBoxes = genres.map(genre => {
+    const allCheckBoxes = uniqueGenres.map(genre => {
         return (
             <li key={genre.id}>
                 <input 

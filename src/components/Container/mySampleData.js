@@ -78,6 +78,49 @@ const initialSongList = [
         genre: 'dance',
         rating: 2
     },
+// part 2
+    { 
+        id: uuid(),
+        title: 'I\'m yours',
+        artist: 'Jason M\'Raz',
+        genre: 'pop',
+        rating: 3
+    },
+    { 
+        id: uuid(),
+        title: 'Just a trance',
+        artist: 'Trancending',
+        genre: 'trance',
+        rating: 5
+    },
+    { 
+        id: uuid(),
+        title: 'Ironic',
+        artist: 'Alanis Morissette',
+        genre: 'rock',
+        rating: 5
+    },
+    { 
+        id: uuid(),
+        title: '5th Symphony',
+        artist: 'Beethoven',
+        genre: 'classic',
+        rating: 5
+    },
+    { 
+        id: uuid(),
+        title: 'Not an addict',
+        artist: 'K\'s Choice',
+        genre: 'rock',
+        rating: 3
+    },
+    { 
+        id: uuid(),
+        title: 'Boven',
+        artist: 'Blof',
+        genre: 'nederlandstalig',
+        rating: 4
+    },
 ]
 
 export default initialSongList
