@@ -1,15 +1,13 @@
-import React from 'react'
+import React from 'react';
 
-import './Nav.css'
-import {NavLink} from 'react-router-dom'
+import './Nav.css';
+import {NavLink} from 'react-router-dom';
 
-import {useDispatch} from 'react-redux'
-import { toggleDisplayMode } from '../../0-Actions'
+import {useDispatch} from 'react-redux';
+import { toggleDisplayMode } from '../../0-Actions';
 
 const Nav = () => {
-    const dispatch = useDispatch()
-
-
+    const dispatch = useDispatch();
 
     return (
         <nav className="navigation">
@@ -26,7 +24,7 @@ const Nav = () => {
             </ul>
             <button onClick={() => dispatch( toggleDisplayMode() )}> Toggle view </button>
         </nav>
-    )
+    );
 }
 
-export default Nav
+export default Nav;

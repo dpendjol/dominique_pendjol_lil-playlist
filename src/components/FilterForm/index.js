@@ -1,31 +1,31 @@
-import React, {useEffect} from 'react'
+import React, {useEffect} from 'react';
 
-import './FilterForm.css'
-import {useDispatch, useSelector} from 'react-redux'
+import './FilterForm.css';
+import {useDispatch, useSelector} from 'react-redux';
 import {filterRatingChange, 
         filterRatingReset,
-        uniqueGenresChange} from '../../0-Actions'
+        uniqueGenresChange} from '../../0-Actions';
 
 const FilterForm = () => {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
-    const uniqueGenres = useSelector(state => state.uniqueGenres)
-    const filterRating = useSelector(state => state.filterRating)
-    const songList = useSelector(state => state.songList)
+    const uniqueGenres = useSelector(state => state.uniqueGenres);
+    const filterRating = useSelector(state => state.filterRating);
+    const songList = useSelector(state => state.songList);
 
     useEffect( () => {
         dispatch( filterRatingReset() )   
-    }, [songList, dispatch])
+    }, [songList, dispatch]);
 
     const handleChange = (e) => {
         if (e.target.type === "checkbox") { 
-            const id = e.target.id
-            const checked = e.target.checked
-            dispatch( uniqueGenresChange(id, checked) )
+            const id = e.target.id;
+            const checked = e.target.checked;
+            dispatch( uniqueGenresChange(id, checked) );
         } else {
-            const value = e.target.value
-            dispatch(filterRatingChange(value))
-        }
+            const value = e.target.value;
+            dispatch(filterRatingChange(value));
+        };
     }
 
     const allCheckBoxes = uniqueGenres.map(genre => {
@@ -40,8 +40,8 @@ const FilterForm = () => {
                     />
                 <label htmlFor={genre.id}>{genre.genre_name}</label>
             </li>
-        )
-    })
+        );
+    });
 
     return (
         <div className="filter__container">
@@ -60,7 +60,7 @@ const FilterForm = () => {
                 {allCheckBoxes}
             </ul>
         </div>
-    )
+    );
 }
 
-export default FilterForm
+export default FilterForm;

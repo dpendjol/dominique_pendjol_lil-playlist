@@ -1,16 +1,16 @@
 import React from 'react';
-import {Component} from 'react'
-import {v4 as uuid} from 'uuid'
-import './InputForm.css'
+import {Component} from 'react';
+import {v4 as uuid} from 'uuid';
+import './InputForm.css';
 
-import {connect} from 'react-redux'
-import {songAdd} from '../../0-Actions'
+import {connect} from 'react-redux';
+import {songAdd} from '../../0-Actions';
 
 /** This component is connected to a Redux Store. It only makes use of the songAdd action */
 
 class InputForm extends Component {
     constructor(props) {
-        super(props)
+        super(props);
 
         this.state = {
             song: {
@@ -20,10 +20,10 @@ class InputForm extends Component {
                 rating: 0
             },
             newGenre: false,
-        }
+        };
 
-        this.handleClick = this.handleClick.bind(this)
-        this.handleChange = this.handleChange.bind(this)
+        this.handleClick = this.handleClick.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
     
@@ -36,7 +36,7 @@ class InputForm extends Component {
                 genre: this.state.song.genre.toLocaleLowerCase(),
                 rating: this.state.song.rating
             }
-        )
+        );
 
         this.setState(
             {
@@ -48,26 +48,26 @@ class InputForm extends Component {
                 },
                 newGenre: false
             }
-        )
-        event.preventDefault()
+        );
+        event.preventDefault();
     }
 
     handleChange (event) {
-        const {name, type} = event.target
+        const {name, type} = event.target;
 
         let returnObject = {}
         if (type !=="checkbox") {
-            let {value} = event.target
-            value = value === " " ? "" : value 
-            returnObject = {song: {...this.state.song, [name]: value} }
+            let {value} = event.target;
+            value = value === " " ? "" : value;
+            returnObject = {song: {...this.state.song, [name]: value} };
         } else {
-            const {checked} = event.target
+            const {checked} = event.target;
             returnObject = { song: {...this.state.song, genre: ""},
                             [name]: checked
-                            }
-        }
+                            };
+        };
         
-        this.setState(returnObject)
+        this.setState(returnObject);
     }
 
     render() {
@@ -219,18 +219,18 @@ class InputForm extends Component {
                 </form>
             </div>
         )
-    }
+    };
 }
 
 const mapStateToProps = (state) => {
-    const uniqueGenres = state
-    return uniqueGenres
+    const uniqueGenres = state;
+    return uniqueGenres;
 }
 
 const mapDispatchToProps = () => {
     return {
         songAdd: songAdd
-    }
+    };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps())(InputForm)
+export default connect(mapStateToProps, mapDispatchToProps())(InputForm);

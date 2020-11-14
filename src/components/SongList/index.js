@@ -1,41 +1,41 @@
 import React, {useState} from 'react';
-import './SongList.css'
+import './SongList.css';
 
 import {v4 as uuid} from 'uuid';
 
-import {useSelector, useDispatch} from 'react-redux'
-import {songDelete} from '../../0-Actions'
+import {useSelector, useDispatch} from 'react-redux';
+import {songDelete} from '../../0-Actions';
 
 const SongList = ({ songList, genre}) => {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
-    const displayByGenre = useSelector(state => state.displayByGenre)
+    const displayByGenre = useSelector(state => state.displayByGenre);
 
-    const [sortBy, setSortBy] = useState(null)
-    const [sortOrder, setSortOrder] = useState(true)
+    const [sortBy, setSortBy] = useState(null);
+    const [sortOrder, setSortOrder] = useState(true);
     
-    const sortedSongList = [...songList]
+    const sortedSongList = [...songList];
     
     const sorting = (key) => {
         if (sortBy === key) {
-            setSortOrder(!sortOrder)
+            setSortOrder(!sortOrder);
         } else {
-            setSortOrder(true)
-            setSortBy(key)
-        }
+            setSortOrder(true);
+            setSortBy(key);
+        };
     }
 
     const handleClickDelete = (event) => {
-        dispatch(songDelete(event.target.value))
+        dispatch(songDelete(event.target.value));
     }
 
     const getClass = (column) => {
         if (sortBy === null) {
-            return
+            return;
         }
 
         if (sortBy === column) {
-            return sortOrder ? 'ascending' : 'descending'
+            return sortOrder ? 'ascending' : 'descending';
         }
     }
 
@@ -44,16 +44,16 @@ const SongList = ({ songList, genre}) => {
         for (let i = 0; i < number; i++) {
             stars.push(<i key={uuid()} className="fas fa-star"></i>);
         }
-        return stars
+        return stars;
     }
 
     if (sortBy !== null) {
         sortedSongList.sort((a,b) => {
-            if (a[sortBy] < b[sortBy]) return sortOrder ? -1 : 1
-            if (a[sortBy] > b[sortBy]) return sortOrder ? 1 : -1
-            return 0
-        })
-    }
+            if (a[sortBy] < b[sortBy]) return sortOrder ? -1 : 1;
+            if (a[sortBy] > b[sortBy]) return sortOrder ? 1 : -1;
+            return 0;
+        });
+    };
     
     const allSongItems = sortedSongList.map(song => {
         return (
@@ -72,8 +72,8 @@ const SongList = ({ songList, genre}) => {
                 </td> 
                 
             </tr>
-        )
-    })
+        );
+    });
 
     return (
         <table className='songlist'>
@@ -92,7 +92,7 @@ const SongList = ({ songList, genre}) => {
             </tbody>
             
         </table>
-    )
+    );
 }
 
-export default SongList
+export default SongList;

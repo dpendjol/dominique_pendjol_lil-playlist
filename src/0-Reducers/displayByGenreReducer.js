@@ -1,10 +1,10 @@
 const displayByGenreReducer = (state = false, action) => {
     switch (action.type) {
         case 'displayByGenre/toggle':
-            return !state
+            return !state;
         default:
-            return state
-    }
+            return state;
+    };
 }
 
-export default displayByGenreReducer
+export default displayByGenreReducer;

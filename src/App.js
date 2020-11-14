@@ -1,13 +1,13 @@
 import React from 'react'
 
 import './App.css';
-import Container from './components/Container'
-import Header from './components/Header'
+import Container from './components/Container';
+import Header from './components/Header';
 
-import Nav from './components/Nav'
-import About from './components/About'
+import Nav from './components/Nav';
+import About from './components/About';
 
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 function App() {
 

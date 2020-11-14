@@ -1,9 +1,9 @@
-import {combineReducers} from 'redux'
+import {combineReducers} from 'redux';
 
-import songReducer from './songReducer'
-import filterRatingReducer from './filterRatingReducer'
-import displayByGenreReducer from './displayByGenreReducer'
-import uniqueGenresReducer from './uniqueGenresReducer'
+import songReducer from './songReducer';
+import filterRatingReducer from './filterRatingReducer';
+import displayByGenreReducer from './displayByGenreReducer';
+import uniqueGenresReducer from './uniqueGenresReducer';
 
 
 const allReducers = combineReducers({
@@ -11,6 +11,6 @@ const allReducers = combineReducers({
     filterRating: filterRatingReducer,
     displayByGenre: displayByGenreReducer,
     uniqueGenres: uniqueGenresReducer
-})
+});
 
-export default allReducers
+export default allReducers;

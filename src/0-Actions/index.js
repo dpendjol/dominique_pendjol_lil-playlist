@@ -2,47 +2,47 @@ export const songAdd = (songObject) => {
     return {
         type: 'song/add',
         payload: songObject
-    }
+    };
 }
 
 export const songDelete = (songId) => {
     return {
         type: 'song/delete',
         payload: songId
-    }
+    };
 }
 
 export const filterRatingReset = () => {
-    return ( {
+    return {
         type: 'filterRating/reset',
         payload: null
-    })
+    };
 }
 
 export const filterRatingChange = (ratingValue) => {
-    return ( {
+    return {
         type: 'filterRating/change',
         payload: ratingValue
-    })
+    };
 }
 
 export const uniqueGenresChangeAll = (fullList) => {
-    return ( {
+    return {
         type: 'uniqueGenres/changeAll',
         payload: fullList
-    })
+    };
 }
 
 export const uniqueGenresChange = (id, checked) => {
-    return ( {
+    return {
         type: 'uniqueGenres/change',
         payload: {id, checked}
-    })
+    };
 }
 
 export const toggleDisplayMode = () => {
-    return ( {
+    return {
         type: 'displayByGenre/toggle',
         payload: null
-    })
+    };
 }

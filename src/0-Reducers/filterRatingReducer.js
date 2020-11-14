@@ -1,12 +1,12 @@
 const filterRatingReducer = (state = 0, action) => {
     switch (action.type) {
         case 'filterRating/reset':
-            return 0
+            return 0;
         case 'filterRating/change':
-            return action.payload
+            return action.payload;
         default:
-            return state
-    }
+            return state;
+    };
 }
 
-export default filterRatingReducer
+export default filterRatingReducer;
