@@ -31,10 +31,11 @@ const Container = () => {
      */
     useEffect(() => {
         const arrObjGenres = []
-        const uniqueGenres = getUniqueGenres(songList)
-        uniqueGenres.forEach(genre => {
-            arrObjGenres.push({id: uuid(), genre_name: [genre], value: false})
-        })
+        getUniqueGenres(songList)
+            .forEach(genre => {
+                console.log(genre)
+                arrObjGenres.push({id: uuid(), genre_name: genre, value: false})
+            })
         dispatch(uniqueGenresChange((arrObjGenres)))
     },[songList])    
     
@@ -50,7 +51,7 @@ const Container = () => {
                 return genres.includes(currentValue) ? genres : [...genres, currentValue]
         }, [])
         // sorting because it looks nicer
-        console.log('Get unique genres')
+        console.log(uniqueGenres)
         return uniqueGenres.sort()
     }
 

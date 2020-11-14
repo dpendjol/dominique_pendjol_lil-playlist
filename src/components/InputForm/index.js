@@ -73,7 +73,6 @@ class InputForm extends Component {
     render() {
         return (
             <div className="input__container">
-                {console.log(this.state)}
                 <label>Nieuw liedje invoeren <i className="fas fa-question-circle tooltip">
                 <span className="tooltiptext">Als het hele formulier is ingevuld, dan wordt de knop geactiveerd.</span></i>
                 </label>
