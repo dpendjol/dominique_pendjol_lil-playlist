@@ -1,48 +1,55 @@
-.songlist {
-    list-style: none;
-    margin: 10px;
-    padding: 5px;
-    width: 90%;
-    border: 1px solid black;
-    background-color: rgba(255,255,255,0.3);
+.songlist__container {
+  margin: 10px;
+}
+
+.songlist__container .songlist {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid black;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.songlist__container caption {
+  margin-top: 20px;
+  font-size: 1.2rem;
+  font-style: italic;
+  text-decoration: underline;
+  color: whitesmoke;
+  font-weight: bold;
+}
+
+.songlist__container th {
+  text-align: left;
+}
+
+.songlist__container thead tr {
+  font-style: italic;
+  background-color: rgba(0, 0, 0, 0.4);
+  color: whitesmoke;
+}
+
+.songlist__container tbody tr:nth-child(odd) {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.songlist__container tbody tr td:nth-child(3) {
+  min-width: 100px;
+  background-color: orange;
+}
+
+.songlist__container:first-child > caption {
+  margin-top: 0px;
 }
 
 .ascending::after {
-    /* background-color: green; */
-    font-family: "Font Awesome 5 Free";
-    content: "  \f0dd";
+  /* background-color: green; */
+  font-family: "Font Awesome 5 Free";
+  content: "  \f0dd";
 }
 
 .descending::after {
-    /* background-color: red; */
-    font-family: "Font Awesome 5 Free";
-    content: "  \f0de";
+  /* background-color: red; */
+  font-family: "Font Awesome 5 Free";
+  content: "  \f0de";
 }
-
-.songlist caption {
-    margin-top: 20px;
-    font-size: 1.2rem;
-    font-style: italic;
-    text-decoration: underline;
-    color: whitesmoke;
-    font-weight: bold;
-}
-
-.songlist th {
-    width: 20%;
-    text-align: left;
-}
-
-.songlist thead tr {
-    font-style: italic;
-    background-color: rgba(0,0,0,0.4);
-    color: whitesmoke;
-}
-
-.songlist tbody tr:nth-child(odd) {
-    background-color: rgba(255,255,255,0.4);
-}
-
-.songlist:first-child > caption {
-    margin-top: 0px;
-}
+/*# sourceMappingURL=SongList.css.map */

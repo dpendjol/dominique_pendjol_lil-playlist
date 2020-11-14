@@ -45,11 +45,6 @@ const FilterForm = () => {
 
     return (
         <div className="filter__container">
-            <label htmlFor="filter__list">Filter lijst door genre</label>
-            <ul id="filter__list" className="filter__list">
-                {allCheckBoxes}
-            </ul>
-
             <label htmlFor="filter__rating">Filter lijst door rating</label>
             <select id="filter__rating" name="filter__rating" value={filterRating} onChange={handleChange}>
                 <option value={0}>--Selecteer--</option>                
@@ -59,6 +54,11 @@ const FilterForm = () => {
                 <option value={4}>4 sterren</option>                
                 <option value={5}>5 sterren</option>     
             </select>
+            
+            <label htmlFor="filter__list">Filter lijst door genre</label>
+            <ul id="filter__list" className="filter__list">
+                {allCheckBoxes}
+            </ul>
         </div>
     )
 }

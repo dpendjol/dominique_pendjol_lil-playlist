@@ -153,6 +153,7 @@ class InputForm extends Component {
                     
                     <label>
                         <span>Rating</span>
+                        <span className='input__buttoncontainer'>
                         <label>
                             <input 
                                 type='radio' 
@@ -203,6 +204,7 @@ class InputForm extends Component {
                                 />
                             5
                         </label>
+                        </span>
                     </label>
 
                     <br />

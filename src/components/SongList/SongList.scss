@@ -1,0 +1,52 @@
+
+.songlist__container {
+    margin: 10px;
+    & .songlist {
+        width: 100%;
+        padding: 5px;
+        border: 1px solid black;
+        background-color: rgba(255,255,255,0.3)
+    }
+    & caption {
+        margin-top: 20px;
+        font-size: 1.2rem;
+        font-style: italic;
+        text-decoration: underline;
+        color: whitesmoke;
+        font-weight: bold;
+    }
+    & th {
+        text-align: left;
+    }
+    & thead tr {
+        font-style: italic;
+        background-color: rgba(0,0,0,0.4);
+        color: whitesmoke;
+    }
+    & tbody {
+        & tr:nth-child(odd) {
+            background-color: rgba(255,255,255,0.4);
+        }
+        & tr {
+            & td:nth-child(3) {
+                min-width: 100px;
+                background-color: orange;
+            }
+        }
+    }
+    &:first-child > caption {
+        margin-top: 0px;
+    }
+}
+
+.ascending::after {
+    /* background-color: green; */
+    font-family: "Font Awesome 5 Free";
+    content: "  \f0dd";
+}
+
+.descending::after {
+    /* background-color: red; */
+    font-family: "Font Awesome 5 Free";
+    content: "  \f0de";
+}
