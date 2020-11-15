@@ -1,5 +1,10 @@
 ## Eindopdracht Lil' Playlist 
 
+*There is a live version on Netlify: [https://inspiring-northcutt-cc46f5.netlify.app/](https://inspiring-northcutt-cc46f5.netlify.app/)*
+*The songrating doesn't reflect my personal preferences. They where chosen randomly, sort of. Just filled in a number.*
+
+*If you want to use your own box on JSONbox.io, just change the url constant in de api-client.js file.*
+
 ### Got the following features working
 - As a user I would like to fill in the following information about my song: title, artist, genre, rating (dropdown menu is not required).
   - *State form field managed in component, because is local state.*
