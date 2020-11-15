@@ -8,17 +8,12 @@ import {Provider} from 'react-redux'
 
 import {url, getDataFromApi} from './api-client';
 
-
-
-getDataFromApi(url).then(data => {
-  console.log(data)
-  const store = createStore(allReducers, {songList: data,
-    filterRating: 0,
-    displayByGenre: true,
-    uniqueGenres: []},
+getDataFromApi(url)
+.then(data => {
+  const store = createStore(allReducers, {songList: data},
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
      );
-
+     
      ReactDOM.render(
       <React.StrictMode>
         <Provider store={store}>
@@ -28,15 +23,13 @@ getDataFromApi(url).then(data => {
       document.getElementById('root')
     );
 
-}).catch ((err) => {
+})
+.catch ((err) => {
   ReactDOM.render(
-    <React.StrictMode>
-  
+    <React.StrictMode>  
         <h1> Er is een fout opgetreden </h1>
         {console.log(err)}
     </React.StrictMode>,
     document.getElementById('root')
   );
 });
-
- 

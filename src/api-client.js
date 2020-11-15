@@ -1,6 +1,5 @@
 export const url = 'https://jsonbox.io/box_699b215fdbb81ec94735';
 
-
 /** Gets data from API, returns it in JSON format
  * 
  * @param {String} apiEndpoint Endpoint API

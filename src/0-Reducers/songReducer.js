@@ -1,6 +1,4 @@
-import mySampleData from '../components/Container/mySampleData';
-
-const songReducer = (state = mySampleData, action) => {
+const songReducer = (state = [], action) => {
     switch (action.type) {
         case ('song/add'):
             return [...state, action.payload];
