@@ -47,7 +47,7 @@ const FilterForm = () => {
         <div className="filter__container">
             <label htmlFor="filter__rating">Filter lijst door rating</label>
             <select id="filter__rating" name="filter__rating" value={filterRating} onChange={handleChange}>
-                <option value={0}>--Selecteer--</option>                
+                <option value={0}>--Alles weergeven--</option>                
                 <option value={1}>1 ster</option>    
                 <option value={2}>2 sterren</option>    
                 <option value={3}>3 sterren</option>    
