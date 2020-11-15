@@ -6,6 +6,8 @@ import {v4 as uuid} from 'uuid';
 import {useSelector, useDispatch} from 'react-redux';
 import {songDelete} from '../../0-Actions';
 
+import {url, deleteDataFromApi} from '../../api-client'
+
 const SongList = ({ songList, genre}) => {
     const dispatch = useDispatch();
 
@@ -26,7 +28,9 @@ const SongList = ({ songList, genre}) => {
     }
 
     const handleClickDelete = (event) => {
-        dispatch(songDelete(event.target.value));
+        const id = event.target.value
+        deleteDataFromApi(url, id)
+        .then(() => dispatch( songDelete(id)) );
     }
 
     const getClass = (column) => {

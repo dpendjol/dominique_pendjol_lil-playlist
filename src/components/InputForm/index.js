@@ -1,6 +1,5 @@
 import React from 'react';
 import {Component} from 'react';
-import {v4 as uuid} from 'uuid';
 import './InputForm.css';
 
 import {connect} from 'react-redux';
@@ -37,7 +36,6 @@ class InputForm extends Component {
             rating: parseInt(this.state.song.rating, 10)
         })
         .then(data => {
-            console.log(data);
             this.props.songAdd(data)
         })
         .catch ((err) => {
