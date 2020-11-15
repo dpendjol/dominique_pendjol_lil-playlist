@@ -57,14 +57,14 @@ const SongList = ({ songList, genre}) => {
     
     const allSongItems = sortedSongList.map(song => {
         return (
-            <tr key={song.id}>
+            <tr key={song._id}>
                 <td>{song.title}</td>
                 <td>{song.artist}</td>
                 <td>{getStars(song.rating)}</td>
                 {!displayByGenre ? <td>{song.genre}</td> : null}
                 <td> 
                     <button 
-                        value={song.id} 
+                        value={song._id} 
                         onClick={handleClickDelete}
                         >
                             delete

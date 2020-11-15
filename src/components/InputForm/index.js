@@ -6,6 +6,8 @@ import './InputForm.css';
 import {connect} from 'react-redux';
 import {songAdd} from '../../0-Actions';
 
+import {url, postDataToApi} from '../../api-client'
+
 /** This component is connected to a Redux Store. It only makes use of the songAdd action */
 
 class InputForm extends Component {
@@ -28,15 +30,19 @@ class InputForm extends Component {
 
     
     handleClick (event) {
-        this.props.songAdd( 
-            { 
-                id: uuid(),
-                title: this.state.song.title,
-                artist: this.state.song.artist,
-                genre: this.state.song.genre.toLocaleLowerCase(),
-                rating: this.state.song.rating
-            }
-        );
+        postDataToApi(url, {
+            title: this.state.song.title,
+            artist: this.state.song.artist,
+            genre: this.state.song.genre.toLocaleLowerCase(),
+            rating: parseInt(this.state.song.rating, 10)
+        })
+        .then(data => {
+            console.log(data);
+            this.props.songAdd(data)
+        })
+        .catch ((err) => {
+            console.log(err)
+        });
 
         this.setState(
             {

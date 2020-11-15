@@ -6,15 +6,37 @@ import allReducers from './0-Reducers'
 import {createStore} from 'redux'
 import {Provider} from 'react-redux'
 
-const store = createStore(allReducers,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-   );
+import {url, getDataFromApi} from './api-client';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+
+
+getDataFromApi(url).then(data => {
+  console.log(data)
+  const store = createStore(allReducers, {songList: data,
+    filterRating: 0,
+    displayByGenre: true,
+    uniqueGenres: []},
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+     );
+
+     ReactDOM.render(
+      <React.StrictMode>
+        <Provider store={store}>
+          <App />
+        </Provider>
+      </React.StrictMode>,
+      document.getElementById('root')
+    );
+
+}).catch ((err) => {
+  ReactDOM.render(
+    <React.StrictMode>
+  
+        <h1> Er is een fout opgetreden </h1>
+        {console.log(err)}
+    </React.StrictMode>,
+    document.getElementById('root')
+  );
+});
+
+ 
