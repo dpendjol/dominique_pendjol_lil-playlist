@@ -2,7 +2,7 @@
 
 *There is a live version on Netlify: [https://inspiring-northcutt-cc46f5.netlify.app/](https://inspiring-northcutt-cc46f5.netlify.app/)*
 
-*The songrating doesn't reflect my personal preferences. They where chosen randomly, sort of. Just filled in a number.*
+*The song rating doesn't reflect my personal preferences. They where chosen randomly, sort of. Just filled in a number.*
 
 *If you want to use your own box on JSONbox.io, just change the url constant in de api-client.js file.*
 
