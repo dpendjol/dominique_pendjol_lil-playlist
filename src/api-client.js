@@ -1,4 +1,4 @@
-export const url = 'https://jsonbox.io/box_699b215fdbb81ec94735';
+export const url = 'https://167.71.73.113/songs';
 
 /** Gets data from API, returns it in JSON format
  * 
